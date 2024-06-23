@@ -1,12 +1,23 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import { branch } from "@/fonts/branch/branch";
 
 export const metadata: Metadata = {
   title: "Bonita Maquillaje",
   description: "Somos una tienda virtual y física en la ciudad de Cúcuta. Te ofrecemos los productos más TOP de marcas Colombianas en maquillaje, skincare y accesorios.",
+  authors: {
+    name: "Rubert Gonzalez - Desarrollador web",
+    url: "https://rubertweb.dev",
+  },
+  keywords: 'Bonita maquillaje, bonita, maquillaje, web, cucuta, tineda virtual, skincare, accesorios.',
+  /* openGraph: {
+    title: "Bonita Maquillaje",
+    description: "Somos una tienda virtual y física en la ciudad de Cúcuta. Te ofrecemos los productos más TOP de marcas Colombianas en maquillaje, skincare y accesorios.",
+    images: '/logo.webp',
+    type: 'website',
+    url: 'https://digi-care-physio.vercel.app/',
+    siteName: 'Bonita Maquillaje'
+  } */
 };
 
 export default function RootLayout({
@@ -16,7 +27,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className={inter.className}>{children}</body>
+      <head>
+        <link rel="icon" href="/logo.webp" type="image/webp" />
+      </head>
+      <body className={branch.className}>{children}</body>
     </html>
   );
 }
