@@ -3,6 +3,7 @@ import "./globals.css";
 import { branch } from "@/fonts/branch/branch";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://bonita-maquillaje.vercel.app"),
   title: "Bonita Maquillaje",
   description: "Somos una tienda virtual y física en la ciudad de Cúcuta. Te ofrecemos los productos más TOP de marcas Colombianas en maquillaje, skincare y accesorios.",
   authors: {
@@ -10,14 +11,14 @@ export const metadata: Metadata = {
     url: "https://rubertweb.dev",
   },
   keywords: 'Bonita maquillaje, bonita, maquillaje, web, cucuta, tineda virtual, skincare, accesorios.',
-  /* openGraph: {
+  openGraph: {
     title: "Bonita Maquillaje",
     description: "Somos una tienda virtual y física en la ciudad de Cúcuta. Te ofrecemos los productos más TOP de marcas Colombianas en maquillaje, skincare y accesorios.",
     images: '/logo.webp',
     type: 'website',
-    url: 'https://digi-care-physio.vercel.app/',
+    url: 'https://bonita-maquillaje.vercel.app/',
     siteName: 'Bonita Maquillaje'
-  } */
+  }
 };
 
 export default function RootLayout({
