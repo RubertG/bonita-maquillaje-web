@@ -9,7 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       boxShadow: {
-        'logo': '0 0 10px 0 rgba(199,176,183,0.8)'
+        'logo': '0 0 10px 0 rgba(199,176,183,0.8)',
+        'button': '0 3px 5px 0 rgba(199,176,183,0.2)',
       },
       backgroundImage: {
         'gradient-principal': 'linear-gradient(to bottom, #FFEBF0 53%, #FFD7E1 100%)',
