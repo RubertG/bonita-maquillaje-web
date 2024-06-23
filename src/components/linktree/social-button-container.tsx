@@ -15,7 +15,7 @@ export function SocialButtonContainer({
       <SocialButton
         href="https://www.instagram.com/maquillajebonita_/"
       >
-        <Instagram className="absolute top-1/2 -translate-y-1/2 left-0 ml-3.5" /> 
+        <Instagram className="absolute top-1/2 -translate-y-1/2 left-0 ml-3.5" />
         <p className="w-full">Instagram</p>
       </SocialButton>
       <SocialButton
@@ -25,7 +25,7 @@ export function SocialButtonContainer({
         <p className="w-full">Whatsapp</p>
       </SocialButton>
       <SocialButton
-        href="https://maps.app.goo.gl/3miSzwC3fEddLaBGA"
+        href="https://maps.app.goo.gl/qq9yRmDhxW7KYDT7A"
       >
         <Location className="absolute top-1/2 -translate-y-1/2 left-0 ml-3.5" />
         <p className="w-full">Ubicación</p>
