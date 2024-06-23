@@ -8,10 +8,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      boxShadow: {
+        'logo': '0 0 10px 0 rgba(199,176,183,0.8)'
+      },
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        'gradient-principal': 'linear-gradient(to bottom, #FFEBF0 53%, #FFD7E1 100%)',
       },
       colors: {
         'principal-100': '#ff9ec6',

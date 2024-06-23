@@ -30,7 +30,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/logo.webp" type="image/webp" />
       </head>
-      <body className={branch.className}>{children}</body>
+      <body className={`${branch.className} bg-gradient-principal antialiased`}>{children}</body>
     </html>
   );
 }
