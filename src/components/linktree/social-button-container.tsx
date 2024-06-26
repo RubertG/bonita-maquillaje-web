@@ -1,4 +1,4 @@
-import { Instagram, Location, Store, Whatsapp } from "../common/icons";
+import { Instagram, Location, Store, Tiktok, Whatsapp } from "../common/icons";
 import { SocialButton } from "./social-button";
 
 interface Props {
@@ -23,6 +23,12 @@ export function SocialButtonContainer({
       >
         <Whatsapp className="absolute top-1/2 -translate-y-1/2 left-0 ml-3.5" />
         <p className="w-full">Whatsapp</p>
+      </SocialButton>
+      <SocialButton
+        href="https://api.whatsapp.com/send?phone=573137443132&text=Hola%21%20vengo%20de%20la%20p%C3%A1gina%20web%20%F0%9F%91%8B"
+      >
+        <Tiktok className="absolute top-1/2 -translate-y-1/2 left-0 ml-3.5" />
+        <p className="w-full">Tiktok</p>
       </SocialButton>
       <SocialButton
         href="https://maps.app.goo.gl/qq9yRmDhxW7KYDT7A"
