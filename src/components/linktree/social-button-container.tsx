@@ -25,7 +25,7 @@ export function SocialButtonContainer({
         <p className="w-full">Whatsapp</p>
       </SocialButton>
       <SocialButton
-        href="https://api.whatsapp.com/send?phone=573137443132&text=Hola%21%20vengo%20de%20la%20p%C3%A1gina%20web%20%F0%9F%91%8B"
+        href="https://www.tiktok.com/@maquillajebonita_"
       >
         <Tiktok className="absolute top-1/2 -translate-y-1/2 left-0 ml-3.5" />
         <p className="w-full">Tiktok</p>
