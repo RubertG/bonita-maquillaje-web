@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { branch } from "@/fonts/branch/branch";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://bonita-maquillaje.vercel.app"),
@@ -31,7 +30,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/logo.webp" type="image/webp" />
       </head>
-      <body className={`${branch.className} bg-gradient-principal antialiased`}>{children}</body>
+      <body className='bg-gradient-principal antialiased'>{children}</body>
     </html>
   );
 }

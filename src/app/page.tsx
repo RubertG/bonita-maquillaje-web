@@ -1,10 +1,11 @@
 import { Header } from "@/components/linktree/header"
 import { SocialButtonContainer } from "@/components/linktree/social-button-container"
+import { branch } from "@/fonts/branch/branch"
 
 function LinkstreePage() {
   return (
     <main
-      className="h-dvh flex flex-col items-center md:justify-center m-auto mx-7 my-5 lg:mx-auto max-w-4xl"
+      className={`h-dvh flex flex-col items-center md:justify-center m-auto mx-7 my-5 lg:mx-auto max-w-4xl ${branch.className}`}
     >
       <Header className="lg:mt-0" />
       <SocialButtonContainer className="mt-7 lg:mt-5" />
