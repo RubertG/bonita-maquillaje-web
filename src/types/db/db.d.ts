@@ -1,9 +1,4 @@
-/* export interface Users {
-  id: string
-  name: string
-  email: string
-  number: number
-} */
+export type Id = string
 
 export interface Tone {
   color: string
@@ -11,35 +6,35 @@ export interface Tone {
 }
 
 export interface Category {
-  id: string
+  id: Id
   name: string
   img: string
 }
 
 export interface Products {
-  id: string
+  id: Id
   name: string
   price: number
   description: string
   stock: number
   tone: Tone[]
   imgs: string[]
-  category: Pick<Category, 'id'>
+  category: Id
 }
 
 export interface Order {
-  id: string
+  id: Id
   name: string
   email: string
   phone: number
   department: string
   city: string
   address: string
-  products: Array<Pick<Products, 'id'>>
+  products: Array<Id>
 }
 
-export interface DiscountCode {
-  id: string
+export interface DiscountCodes {
+  id: Id
   code: string
   discount: number
   expiration: Date

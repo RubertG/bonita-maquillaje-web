@@ -10,12 +10,15 @@ La página web tiene en su home page su Linkstree con sus redes sociales, ubicac
 
 ### TODO
 
-[] Conectar con firebase para la base de datos
-[] Conectar con firebase para la autenticacion
+[x] Conectar con firebase para la base de datos
+
 - Hacer funciones para el manejo de la base de datos en la pagina de administrador 
-  [] Crear los tipos de la base de datos
+  [x] Crear los tipos de la base de datos
+  [] Poblar base de datos con datos de prueba
   [] Metodos para traer datos de firebase y mostrarlos en la pagina
   [] Metodos para crear, actualizar y borrar datos de firebase en cada coleccion necesaria
+
+[] Conectar con firebase para la autenticacion
 [] Crear la navegacion para el administrador
 [] Crear cada vista para el administrador segun el figma
 [] Pulir los diferentes estilos de la página de administrador
