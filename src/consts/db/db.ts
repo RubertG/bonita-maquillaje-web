@@ -1,6 +1,6 @@
 export const ROUTES_COLLECTIONS = {
-  PRODUCTS: '/products',
+  DISCOUNT_CODES: '/discountCodes',
   CATEGORIES: '/categories',
+  PRODUCTS: '/products',
   ORDERS: '/orders',
-  DISCOUNT_CODES: '/discount-codes',
 }

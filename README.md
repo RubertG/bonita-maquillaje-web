@@ -14,7 +14,7 @@ La página web tiene en su home page su Linkstree con sus redes sociales, ubicac
 
 - Hacer funciones para el manejo de la base de datos en la pagina de administrador 
   [x] Crear los tipos de la base de datos
-  [] Poblar base de datos con datos de prueba
+  [x] Poblar base de datos con datos de prueba
   [] Metodos para traer datos de firebase y mostrarlos en la pagina
   [] Metodos para crear, actualizar y borrar datos de firebase en cada coleccion necesaria
 
