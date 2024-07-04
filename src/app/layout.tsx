@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import type { Metadata } from "next"
+import "./globals.css"
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://bonita-maquillaje.vercel.app"),
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     url: 'https://bonita-maquillaje.vercel.app/',
     siteName: 'Bonita Maquillaje'
   }
-};
+}
 
 export default function RootLayout({
   children,
@@ -30,7 +30,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/logo.webp" type="image/webp" />
       </head>
-      <body className='bg-gradient-principal antialiased'>{children}</body>
+      <body className='antialiased bg-bg-100'>{children}</body>
     </html>
-  );
+  )
 }

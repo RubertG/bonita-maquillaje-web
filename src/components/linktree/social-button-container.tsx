@@ -1,5 +1,5 @@
-import { Instagram, Location, Store, Tiktok, Whatsapp } from "../common/icons";
-import { SocialButton } from "./social-button";
+import { Instagram, Location, Store, Tiktok, Whatsapp } from "../common/icons"
+import { SocialButton } from "./social-button"
 
 interface Props {
   className?: string;

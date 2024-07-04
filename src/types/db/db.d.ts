@@ -11,7 +11,7 @@ export interface Category {
   img: string
 }
 
-export interface Products {
+export interface Product {
   id: Id
   name: string
   price: number
@@ -33,7 +33,7 @@ export interface Order {
   products: Array<Id>
 }
 
-export interface DiscountCodes {
+export interface DiscountCode {
   id: Id
   code: string
   discount: number
