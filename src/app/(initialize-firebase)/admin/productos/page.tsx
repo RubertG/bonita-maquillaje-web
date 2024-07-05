@@ -1,6 +1,6 @@
 function ProductsPage() {
   return (
-    <div className="mt-10">ProductsPage</div>
+    <div className="mt-32 h-screen text-center">ProductsPage</div>
   )
 }
 

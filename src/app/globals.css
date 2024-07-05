@@ -4,7 +4,7 @@
 
 .entry {
   opacity: 0;
-  animation: entry 0.2s ease-in-out both; 
+  animation: entry 0.15s ease-in-out both; 
 }
 
 @keyframes entry {
