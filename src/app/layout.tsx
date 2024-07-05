@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "Somos una tienda virtual y física en la ciudad de Cúcuta. Te ofrecemos los productos más TOP de marcas Colombianas en maquillaje, skincare y accesorios.",
   authors: {
     name: "Rubert Gonzalez - Desarrollador web",
-    url: "https://rubertweb.dev",
+    url: "https://rubertweb.dev"
   },
   keywords: 'Bonita maquillaje, bonita, maquillaje, web, cucuta, tineda virtual, skincare, accesorios.',
   openGraph: {
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({
-  children,
+  children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
