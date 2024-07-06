@@ -6,7 +6,7 @@ import { Input, PasswordInput } from "@/components/common/input"
 import { signIn } from "@/firebase/services/auth"
 import { Spinner } from "@/components/common/icons"
 import clsx from "clsx"
-import { useForm } from "@/hooks/use-form"
+import { useForm } from "@/hooks/common/use-form"
 
 interface Inputs {
   email: string
