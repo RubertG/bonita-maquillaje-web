@@ -1,5 +1,6 @@
 'use client'
 
+import { singOutSession } from "@/firebase/services/auth"
 import { branch } from "@/fonts/branch/branch"
 import clsx from "clsx"
 import Link from "next/link"
@@ -42,14 +43,14 @@ export function Nav() {
           <img
             src="/logo-2.webp"
             alt="Logo de Bonita Maquillaje"
-            className="h-11 object-cover" />
+            className="h-10 object-cover" />
           <h1
-            className={`text-xl ${branch.className}`} >
+            className={`text-xl lg:text-2xl ${branch.className}`} >
             Bonita maquillaje
           </h1>
         </Link>
         <ul
-          className={clsx("text-text-100 text-lg font-light text-center entry bg-bg-100 lg:bg-inherit absolute w-full top-16 left-0 lg:static lg:w-auto lg:flex lg:items-center lg:justify-center", {
+          className={clsx("text-text-100 font-light text-center entry bg-bg-100 lg:bg-inherit absolute w-full top-16 left-0 lg:static lg:w-auto lg:flex lg:items-center lg:justify-center", {
             "hidden": !open
           })}
           onClick={() => setOpen(false)}
@@ -57,19 +58,29 @@ export function Nav() {
           {
             links.map((link) => {
               const isActive = pathname.startsWith(link.href)
-              
+
               return (
-              <li key={link.name}>
-                <Link
-                  href={link.href}
-                  className={clsx("block py-2 px-3 lg:py-1 w-full border-b border-bg-200 lg:border-0 lg:hover:bg-bg-300 lg:rounded-lg lg:transition-colors", {
-                    "text-accent-300 lg:hover:text-text-100": isActive
-                  })}>
-                  {link.name}
-                </Link>
-              </li>
-            )})
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    className={clsx("block py-2 px-3 lg:py-1 w-full border-b border-bg-200 lg:border-0 lg:hover:bg-bg-300 lg:rounded-lg lg:transition-colors", {
+                      "text-accent-300 lg:hover:text-text-100 font-normal": isActive
+                    })}>
+                    {link.name}
+                  </Link>
+                </li>
+              )
+            })
           }
+          <li>
+            <button
+              onClick={async () => {
+                await singOutSession()
+              }}
+              className="block py-2 px-3 lg:py-1 w-full border-b border-bg-200 lg:border-0 lg:hover:bg-bg-200 lg:rounded-lg lg:transition-colors">
+              Cerrar sesión
+            </button>
+          </li>
         </ul>
         <button
           className="flex justify-between items-center gap-[3px] flex-col lg:hidden"
