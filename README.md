@@ -15,10 +15,10 @@ La página web tiene en su home page su Linkstree con sus redes sociales, ubicac
 - Hacer funciones para el manejo de la base de datos en la pagina de administrador 
   [x] Crear los tipos de la base de datos
   [x] Poblar base de datos con datos de prueba
-  [] Metodos para traer datos de firebase y mostrarlos en la pagina
-  [] Metodos para crear, actualizar y borrar datos de firebase en cada coleccion necesaria
+  [x] Metodos para traer datos de firebase y mostrarlos en la pagina
+  [x] Metodos para crear, actualizar y borrar datos de firebase en cada coleccion necesaria
 
-[] Conectar con firebase para la autenticacion
-[] Crear la navegacion para el administrador
+[x] Crear la navegacion para el administrador
+[] Conectar con firebase para la autenticacion (login, cerrar sesion, contexto, hooks)
 [] Crear cada vista para el administrador segun el figma
 [] Pulir los diferentes estilos de la página de administrador

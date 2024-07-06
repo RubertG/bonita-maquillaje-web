@@ -1,4 +1,4 @@
-import { Nav } from "@/components/admin/nav"
+import { AuthProvider } from "@/contexts/auth/auth-context"
 import { ReactNode } from "react"
 
 function AdminLayout({
@@ -7,12 +7,11 @@ function AdminLayout({
   children: ReactNode
 }) {
   return (
-    <>
-      <Nav />
+    <AuthProvider>
       {
         children
       }
-    </>
+    </AuthProvider>
   )
 }
 

@@ -1,15 +1,17 @@
 import { initializeApp } from "firebase/app"
 import { getFirestore } from "firebase/firestore"
+import { getAuth } from "firebase/auth"
 
 const firebaseConfig = {
-  apiKey: process.env.API_KEY,
-  authDomain: process.env.AUTH_DOMAIN,
-  projectId: process.env.PROJECT_ID,
-  storageBucket: process.env.STORAGE_BUCKET,
-  messagingSenderId: process.env.MESSAGE_SENDER_ID,
-  appId: process.env.APP_ID,
-  measurementId: process.env.MEASUREMENT_ID
-};
+  apiKey: "AIzaSyBgxAZ3lm8fAsdy-HpbQdGUq70eTkwuOYA",
+  authDomain: "bonita-maquillaje.firebaseapp.com",
+  projectId: "bonita-maquillaje",
+  storageBucket: "bonita-maquillaje.appspot.com",
+  messagingSenderId: "901399052017",
+  appId: "1:901399052017:web:d4a4a4e07bb7383a747350",
+  measurementId: "G-VQ5X9P9397"
+}
 
 const app = initializeApp(firebaseConfig)
 export const db = getFirestore(app) 
+export const auth = getAuth()
