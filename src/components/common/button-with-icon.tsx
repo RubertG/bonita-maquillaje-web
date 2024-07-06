@@ -1,3 +1,4 @@
+import { branch } from "@/fonts/branch/branch"
 import Link from "next/link"
 
 interface Props {
@@ -5,12 +6,12 @@ interface Props {
   href: string
 }
 
-export function SocialButton({
+export function ButtonWithIcon({
   children, href
 }: Props) {
   return (
     <Link
-      className="w-full relative py-2.5 px-3.5 rounded-lg bg-accent-200 text-text-100 text-center text-xl shadow-button lg:hover:scale-105 lg:transition-transform"
+      className={`w-full relative py-2.5 px-3.5 rounded-lg bg-accent-200 text-text-100 text-center text-xl shadow-button lg:hover:scale-105 lg:transition-transform ${branch.className}`}
       target="_blank"
       rel="noreferrer"
       href={href}

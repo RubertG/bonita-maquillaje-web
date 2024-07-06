@@ -9,7 +9,7 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
 
   if (loading) {
     return (
-      <main>
+      <main className="flex min-h-dvh items-center justify-center py-10 px-4">
         <Spinner />
       </main>
     )

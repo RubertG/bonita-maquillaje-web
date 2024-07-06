@@ -1,21 +1,30 @@
+"use client"
+
+import { LoginForm } from "@/components/admin/login/login-form"
+import { Spinner } from "@/components/common/icons"
+import { useAuthContext } from "@/hooks/auth/use-auth-context"
+import { redirect } from "next/navigation"
+
 export default function LoginPage() {
+  const { user, loading } = useAuthContext()
+
+  if (loading) {
+    return (
+      <main
+        className="flex min-h-dvh items-center justify-center py-10 px-4">
+        <Spinner />
+      </main>
+    )
+  }
+
+  if (user) {
+    return redirect("/admin/productos")
+  }
+
   return (
     <main
-    className="flex min-h-dvh flex-col items-center justify-center p-10">
-      <form action="">
-        <h1>Iniciar sesión</h1>
-        <input
-          type="email"
-          name="email"
-          placeholder="admin@gmail.com"
-          required />
-        <input
-          type="password"
-          name="password"
-          placeholder="Tu contraseña"
-          required />
-          <button type="submit">Ingresar</button>
-      </form>
+      className="flex min-h-dvh items-center justify-center py-10 px-4">
+      <LoginForm />
     </main>
   )
 }
