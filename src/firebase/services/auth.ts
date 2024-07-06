@@ -1,4 +1,4 @@
-import { signInWithEmailAndPassword, UserCredential } from "firebase/auth"
+import { signInWithEmailAndPassword, UserCredential, signOut } from "firebase/auth"
 import { auth } from "../initializeApp"
 import { FirebaseError } from "firebase/app"
 
@@ -32,9 +32,9 @@ export const signIn = async (email: string, password: string): Promise<SignInRet
 }
 
 
-export const singOut = async () => {
+export const singOutSession = async () => {
   try {
-    await auth.signOut()    
+    await signOut(auth)    
   } catch (error) {
     return error as TypeError
   }
