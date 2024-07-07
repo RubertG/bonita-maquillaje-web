@@ -10,7 +10,7 @@ interface InputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElem
 
 export const Input = forwardRef(function Input({ className, ...props }: InputProps, ref: LegacyRef<HTMLInputElement> | undefined) {
   return (
-    <input className={`w-full rounded-lg px-3.5 py-2.5 focus:outline-bg-200 bg-bg-50 text-text-200 font-light placeholder:text-gray-400 ${className}`} {...props} {...(ref == undefined) ? {} : { ref }} />
+    <input className={`w-full rounded-lg px-3.5 py-2.5 focus:outline-bg-200 bg-bg-50 text-text-200 font-light placeholder:text-gray-400 shadow-button ${className}`} {...props} {...(ref == undefined) ? {} : { ref }} />
   )
 })
 
@@ -19,7 +19,7 @@ export const PasswordInput = forwardRef(function PasswordInput({ className, ...p
 
   return (
     <div
-      className={`flex items-center w-full bg-bg-50 rounded-lg pr-2.5 gap-1 ${className}`}>
+      className={`flex items-center w-full bg-bg-50 rounded-lg pr-2.5 gap-1 shadow-button ${className}`}>
       <input
         type={showPassword ? "text" : "password"}
         className="w-full rounded-lg px-3.5 py-2.5 focus:outline-none text-text-200 font-light placeholder:text-gray-400"
