@@ -1,10 +1,16 @@
-import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore"
+import { collection, deleteDoc, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore"
 import { db } from "../initializeApp"
 import { ROUTES_COLLECTIONS } from "@/consts/db/db"
-import { Product } from "@/types/db/db"
+import { Id, Product } from "@/types/db/db"
 
-export const getProducts = async () => {
-  const querySnapshot = await getDocs(collection(db, ROUTES_COLLECTIONS.PRODUCTS))
+interface Query {
+  category?: Id | undefined
+  search?: Id | undefined
+}
+
+export const getProducts = async ({ category, search }: Query) => {
+  const q = query(collection(db, ROUTES_COLLECTIONS.PRODUCTS), where('category', '==', category || ""), where('name', '>=', search || ""))
+  const querySnapshot = await getDocs(q)
   const products: Product[] = []
 
   querySnapshot.forEach(doc => {
