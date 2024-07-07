@@ -19,6 +19,11 @@ La página web tiene en su home page su Linkstree con sus redes sociales, ubicac
   [x] Metodos para crear, actualizar y borrar datos de firebase en cada coleccion necesaria
 
 [x] Crear la navegacion para el administrador
-[] Conectar con firebase para la autenticacion (login, cerrar sesion, contexto, hooks)
-[] Crear cada vista para el administrador segun el figma
-[] Pulir los diferentes estilos de la página de administrador
+[x] Conectar con firebase para la autenticacion (login, cerrar sesion, contexto, hooks)
+
+- Crear cada vista para el administrador segun el figma
+  [x] Actualizar reglas de firebase para que solo pueda agregar a la bd el usuario administrador
+  [] Crear componentes para la pagina de productos
+  [] Acomplar componentes para la pagina de productos
+  [] Crear los estilos para la pagina de productos
+  [] Crear ramas internas de la pagina de productos (Crear categoria, agregar producto, editar producto)

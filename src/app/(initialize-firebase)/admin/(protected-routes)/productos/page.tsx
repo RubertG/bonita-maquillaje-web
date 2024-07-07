@@ -1,4 +1,5 @@
 import { CategoriesContainer } from "@/components/admin/products/categories-container"
+import { ProductsContainer } from "@/components/admin/products/products-container"
 import { H1 } from "@/components/common/h1"
 import { Searcher } from "@/components/common/searcher"
 import { getCategories } from "@/firebase/services/categories"
@@ -19,7 +20,7 @@ async function ProductsPage({
 
   return (
     <main
-      className="mx-4 my-16 lg:mt-20"
+      className="px-4 my-16 lg:px-0 lg:mt-20 max-w-6xl mx-auto"
     >
       <H1 className="mb-6">Productos</H1>
       <Searcher />
@@ -27,7 +28,7 @@ async function ProductsPage({
         <CategoriesContainer className="mt-6 lg:mt-4" />
       </Suspense>
       <Suspense fallback={<>cargando productos...</>}>
-        <div className="mt-10"></div>
+        <ProductsContainer className="mt-6" />
       </Suspense>
     </main>
   )
