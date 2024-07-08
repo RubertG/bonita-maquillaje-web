@@ -13,7 +13,7 @@ export function ButtonWithIcon({
 }: Props) {
   return (
     <Link
-      className={`relative inline-flex items-center justify-center py-2.5 px-3.5 rounded-lg bg-accent-200 text-text-100 gap-1 text-center text-xl shadow-button lg:hover:bg-principal-100 lg:transition-colors ${branch.className} ${className}`}
+      className={`relative inline-flex items-center justify-center py-2.5 px-3.5 rounded-lg bg-accent-200 text-text-100 gap-2 text-center text-xl shadow-button lg:hover:bg-principal-100 lg:transition-colors ${branch.className} ${className}`}
       target={target}
       rel="noreferrer"
       href={href}

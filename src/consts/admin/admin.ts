@@ -1,0 +1,1 @@
+export const LIMIT_FILES_SIZE = 5e6
