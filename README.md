@@ -23,7 +23,14 @@ La página web tiene en su home page su Linkstree con sus redes sociales, ubicac
 
 - Crear cada vista para el administrador segun el figma
   [x] Actualizar reglas de firebase para que solo pueda agregar a la bd el usuario administrador
-  [] Crear componentes para la pagina de productos
-  [] Acomplar componentes para la pagina de productos
-  [] Crear los estilos para la pagina de productos
-  [] Crear ramas internas de la pagina de productos (Crear categoria, agregar producto, editar producto)
+  [x] Crear componentes para la pagina de productos
+  [x] Acomplar componentes para la pagina de productos
+  [x] Crear los estilos para la pagina de productos
+
+- Crear ramas internas de la pagina de productos (Crear categoria, agregar producto, editar producto)
+  [] pagina para crear producto
+  [] Componente para subir imagenes del producto
+  [] Endpoint donde llegaran las imagenes y mandarlas a firebase despues de validarlas
+  [] campos del formulario validados 
+  [] Conectar con firebase para subir el producto creado
+  [] Pruebas

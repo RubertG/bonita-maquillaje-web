@@ -50,7 +50,7 @@ export function Nav() {
           </h1>
         </Link>
         <ul
-          className={clsx("text-text-100 font-light text-center entry bg-bg-100 lg:bg-inherit absolute w-full top-16 left-0 lg:static lg:w-auto lg:flex lg:items-center lg:justify-center", {
+          className={clsx("text-text-100 font-light text-center entry bg-bg-100 lg:bg-inherit absolute w-full top-14 left-0 lg:static lg:w-auto lg:flex lg:items-center lg:justify-center", {
             "hidden": !open
           })}
           onClick={() => setOpen(false)}
