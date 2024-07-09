@@ -15,6 +15,10 @@
   animation: entry 0.15s ease-in-out both; 
 }
 
+textarea {
+  field-sizing: content;
+}
+
 @keyframes entry {
   0% {
     opacity: 0;

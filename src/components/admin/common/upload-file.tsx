@@ -41,7 +41,7 @@ export const UploadFile = ({
         filesSizes += file.size
 
         if (filesSizes > LIMIT_FILES_SIZE) {
-          setError(`Se alcanzó el límite de tamaño de archivos (${returnFileSize(LIMIT_FILES_SIZE)})`)
+          setError(`Se alcanzó el límite del tamaño de los archivos (${returnFileSize(LIMIT_FILES_SIZE)})`)
           continue
         }
 
@@ -65,7 +65,7 @@ export const UploadFile = ({
     <section className={`${className}`}>
       <p
         className="text-sm text-text-100 mb-3 font-light">
-        Por recomendación y optimización, sube las imágenes en formato <span className="text-accent-300 font-normal">3/4</span> y que no superen los <span className="text-accent-300 font-normal">{returnFileSize(LIMIT_FILES_SIZE)}</span> en total.
+        Por recomendación y optimización, sube las imágenes en formato <span className="text-accent-300 font-normal">3/4</span> y que el peso total de todas estas no superen los <span className="text-accent-300 font-normal">{returnFileSize(LIMIT_FILES_SIZE)}</span>.
       </p>
       <FileInput
         onChange={handleChange}
@@ -74,7 +74,7 @@ export const UploadFile = ({
         {
           items.map((item, index) => (
             <li
-              className="flex w-full gap-2 items-center rounded-lg justify-between lg:p-2 lg:hover:bg-bg-200 lg:transition-colors"
+              className="flex w-full gap-2 items-center rounded-lg justify-between lg:p-2 lg:hover:bg-bg-200 lg:transition-colors overflow-hidden"
               key={index}
             >
               <div className="flex gap-2 items-center justify-between overflow-hidden">
@@ -83,15 +83,13 @@ export const UploadFile = ({
                   loading="lazy"
                   src={item.url} alt={`${item.name} - Bonita Maquillaje`}
                   title={`${item.name} - Bonita Maquillaje`} />
-                <div>
-                  <p className="font-light text-text-200 whitespace-nowrap"
+                <div className="w-full overflow-hidden">
+                  <p className="font-light text-text-200 whitespace-nowrap overflow-hidden text-ellipsis"
                     title={item.name}
                   >
                     {item.name}
                   </p>
-                  <p className="font-light text-sm text-text-200"
-                    title={item.name}
-                  >
+                  <p className="font-light text-sm text-text-200">
                     {returnFileSize(item.size)}
                   </p>
                 </div>

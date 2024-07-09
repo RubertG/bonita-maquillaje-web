@@ -1,13 +1,12 @@
 "use client"
 
 import { DetailedHTMLProps, forwardRef, InputHTMLAttributes, LegacyRef, useState } from "react"
-import { Eye, EyeOff, Upload } from "./icons"
+import { Eye, EyeOff, Selector, Upload } from "./icons"
 import clsx from "clsx"
 import { branch } from "@/fonts/branch/branch"
+import { Category } from "@/types/db/db"
 
-interface InputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
-  label?: string
-}
+interface InputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {}
 
 export const Input = forwardRef(function Input({ className, ...props }: InputProps, ref: LegacyRef<HTMLInputElement> | undefined) {
   return (
@@ -53,4 +52,43 @@ export const FileInput = forwardRef(function FileInput({ className, ...props }: 
       </label>
     </button>
   )
-}) 
+})
+
+interface SelectInputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> {
+  items?: Pick<Category, "name" | "id">[]
+  title: string
+}
+
+export const SelectInput = forwardRef(function SelectInput({ className, items, title, ...props }: SelectInputProps, ref: LegacyRef<HTMLSelectElement> | undefined) {
+  return (
+    <div className="relative cursor-pointer">
+      <select
+        className={`w-full rounded-lg px-3.5 py-2.5 border-none focus:outline-bg-200 bg-bg-50 text-text-200 font-light placeholder:text-gray-400 appearance-none shadow-button  ${className}`}
+        defaultValue={title}
+        {...props} {...(ref == undefined) ? {} : { ref }}>
+        <option
+          className="text-text-300 font-light py-1 bg-bg-50"
+          disabled
+          selected 
+          value={title}>{title}</option>
+        {items?.map((item) => (
+          <option
+            className="text-text-200 font-light py-1 bg-bg-50"
+            key={item.id}
+            value={item.id}>{item.name}</option>
+        ))}
+      </select>
+      <Selector className="absolute stroke-text-200 right-3 top-1/2 -translate-y-1/2" />
+    </div>
+  )
+})
+
+interface TextAreaProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement> {}
+
+export const TextArea = forwardRef(function TextArea({ className, ...props }: TextAreaProps, ref: LegacyRef<HTMLTextAreaElement> | undefined) {
+  return (
+    <textarea
+      className={`w-full rounded-lg px-3.5 py-2.5 resize-none focus:outline-bg-200 bg-bg-50 text-text-200 font-light placeholder:text-gray-400 shadow-button ${className}`}
+      {...props} {...(ref == undefined) ? {} : { ref }} />
+  )
+})
