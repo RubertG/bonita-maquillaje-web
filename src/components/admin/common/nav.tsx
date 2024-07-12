@@ -35,7 +35,7 @@ export function Nav() {
       className="bg-bg-100 lg:bg-bg-transparent lg:backdrop-blur-sm px-4 py-2.5 fixed w-full top-0 left-0 z-30"
     >
       <nav
-        className="flex items-center justify-between max-w-6xl mx-auto">
+        className="flex items-center justify-between max-w-7xl mx-auto">
         <Link
           className="flex items-center justify-center gap-1"
           href="/"

@@ -2,7 +2,6 @@ import type { Metadata } from "next"
 import "./globals.css"
 import { SkeletonTheme } from "react-loading-skeleton"
 import 'react-loading-skeleton/dist/skeleton.css'
-import { Footer } from "@/components/common/footer"
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://bonita-maquillaje.vercel.app"),
@@ -37,7 +36,6 @@ export default function RootLayout({
         <SkeletonTheme baseColor="#fcdee9" highlightColor="#fff4f4">
           {children}
         </SkeletonTheme>
-        <Footer />
       </body>
     </html >
   )

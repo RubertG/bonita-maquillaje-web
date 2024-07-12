@@ -33,7 +33,6 @@ export function useForm<Inputs extends FieldValues = FieldValues, TypeSchema ext
     handleSubmit: handleSubmit(onSubmit),
     setError,
     errors,
-    loading,
-    onSubmit
+    loading
   }
 }
