@@ -10,8 +10,8 @@ export const ProductsContainer = async ({
   searchParams: { [key: string]: string | undefined }
 }) => {
   const products = await getProducts({
-    category: searchParams.categoria,
-    search: searchParams.busqueda
+    category: searchParams.categoria || "",
+    search: searchParams.busqueda || ""
   })
 
   if (!products || products.length === 0) return (

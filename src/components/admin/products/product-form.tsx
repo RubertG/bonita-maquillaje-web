@@ -1,67 +1,21 @@
 "use client"
 
-import { FileStateItem } from "@/types/admin/admin"
 import { UploadFile } from "../common/upload-file"
-import { BaseSyntheticEvent, useEffect, useState } from "react"
 import { Input, SelectInput, TextArea } from "@/components/common/input"
 import { Button } from "@/components/common/button"
 import { Save, Spinner } from "@/components/common/icons"
-import { useForm } from "@/hooks/common/use-form"
-import { productSchema } from "@/validations/admin/products/product-schema"
-import { Category } from "@/types/db/db"
-import { getCategories } from "@/firebase/services/categories"
 import clsx from "clsx"
-
-interface Inputs {
-  name: string
-  description: string
-  price: string
-  stock: string
-  category: string
-}
+import { AddTone } from "./add-tone"
+import { useProductForm } from "@/hooks/admin/useProductForm"
 
 export const ProductForm = () => {
-  const [imgs, setImgs] = useState<FileStateItem[]>([])
-  const [categories, setCategories] = useState<Pick<Category, "name" | "id">[]>([])
-  const [errorImgs, setErrorImgs] = useState("")
-  const {
-    register, handleSubmit, loading, errors
-  } = useForm<Inputs>({
-    schema: productSchema,
-    actionSubmit: (data) => {
-      console.log(data)
-    }
-  })
-
-  useEffect(() => {
-    const getC = async () => {
-      const c = await getCategories()
-      if (!c) return
-      setCategories(c.map(category => ({
-        name: category.name,
-        id: category.id
-      })))
-    }
-    getC()
-  }, [])
-
-  useEffect(() => {
-    setErrorImgs("")
-  }, [imgs])
-
-  const onSubmit = (e: BaseSyntheticEvent) => {
-    e.preventDefault()
-    if (imgs.length === 0) {
-      setErrorImgs("Se requiere cargar imagenes")
-    }
-    handleSubmit(e)
-  }
+  const { categories, error, errorImgs, errors, imgs, setImgs, register, loading, setTones, tones, onSubmit } = useProductForm()
 
   return (
     <section className="flex flex-col-reverse gap-4 max-w-lg mx-auto lg:grid lg:grid-cols-[55%_1fr] lg:gap-8 lg:max-w-none">
       <form onSubmit={onSubmit}>
         <label
-          className="text-text-100 font-light mb-2 block"
+          className="text-text-100 mb-2 block"
           htmlFor="name">
           Nombre del producto <span className="text-accent-300">*</span>
         </label>
@@ -73,7 +27,7 @@ export const ProductForm = () => {
         {errors.name?.message && <p className="text-red-500 font-light px-3.5 mb-4 mt-2 text-sm">{errors.name?.message}</p>}
 
         <label
-          className="text-text-100 font-light mb-2 block mt-4"
+          className="text-text-100 mb-2 block mt-5"
           htmlFor="category">
           Categoría <span className="text-accent-300">*</span>
         </label>
@@ -87,7 +41,7 @@ export const ProductForm = () => {
         {errors.category?.message && <p className="text-red-500 font-light px-3.5 mb-4 mt-2 text-sm">{errors.category?.message}</p>}
 
         <label
-          className="text-text-100 font-light mb-2 block mt-4"
+          className="text-text-100 mb-2 block mt-5"
           htmlFor="description">
           Descripción <span className="text-accent-300">*</span>
         </label>
@@ -99,7 +53,7 @@ export const ProductForm = () => {
         {errors.description?.message && <p className="text-red-500 font-light px-3.5 mb-4 mt-2 text-sm">{errors.description?.message}</p>}
 
         <label
-          className="text-text-100 font-light mb-2 block mt-4"
+          className="text-text-100 mb-2 block mt-5"
           htmlFor="name">
           Precio del producto <span className="text-accent-300">*</span>
         </label>
@@ -113,7 +67,7 @@ export const ProductForm = () => {
         {errors.price?.message && <p className="text-red-500 font-light px-3.5 mb-4 mt-2 text-sm">{errors.price?.message}</p>}
 
         <label
-          className="text-text-100 font-light mb-2 block mt-4"
+          className="text-text-100 mb-2 block mt-5"
           htmlFor="name">
           Cantidad del producto <span className="text-accent-300">*</span>
         </label>
@@ -126,6 +80,12 @@ export const ProductForm = () => {
         />
         {errors.stock?.message && <p className="text-red-500 font-light px-3.5 mb-4 mt-2 text-sm">{errors.stock?.message}</p>}
 
+        <AddTone
+          setTones={setTones}
+          tones={tones}
+          className="mt-5 mb-1"
+        />
+
         <Button
           className="w-full my-6"
         >
@@ -133,6 +93,7 @@ export const ProductForm = () => {
           <Spinner className={clsx("w-5 h-5 absolute opacity-0 transition-opacity", { "opacity-100": loading })} />
           <p className={clsx("transition-opacity", { "opacity-0": loading })}>Guardar producto</p>
         </Button>
+        {error && <p className="text-red-500 font-light px-3.5 -mt-3 text-sm">{error}</p>}
       </form>
       <aside>
         <UploadFile

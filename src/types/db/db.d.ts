@@ -1,3 +1,5 @@
+import { FileStateItem } from "../admin/admin"
+
 export type Id = string
 
 export interface Tone {
@@ -17,8 +19,8 @@ export interface Product {
   price: number
   description: string
   stock: number
-  tone: Tone[]
-  imgs: string[]
+  tones: Tone[]
+  imgs: FileStateItem[]
   category: Id
 }
 

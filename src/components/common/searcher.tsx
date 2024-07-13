@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { Search } from "./icons"
-import { FormEvent } from "react"
+import { FormEvent, useEffect, useRef } from "react"
 
 export const Searcher = ({
   className, placeholder
@@ -12,6 +12,7 @@ export const Searcher = ({
 }) => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
+  const inputRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -28,6 +29,12 @@ export const Searcher = ({
     router.replace(`${pathname}?${url.toString()}`)
   }
 
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.value = ""
+    }
+  }, [searchParams.get("categoria")])
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -37,7 +44,8 @@ export const Searcher = ({
         placeholder={placeholder ? placeholder : "Busca el producto que quieres..."}
         name="search"
         autoComplete="off"
-        defaultValue={searchParams.get("search") || ""}
+        ref={inputRef}
+        defaultValue={searchParams.get("busqueda") || ""}
         type="text" />
       <button
         type="submit">

@@ -10,7 +10,7 @@ export const Product = ({ imgs, name, price, stock, id }: ProductType) => {
         <img
           className="w-16 object-cover rounded-lg aspect-[3/4]"
           loading="lazy"
-          src={imgs[0]} alt={`${name} - Bonita Maquillaje`}
+          src={imgs[0].url} alt={`${name} - Bonita Maquillaje`}
           title={`${name} - Bonita Maquillaje`} />
         <div>
           <h3 className="text-lg text-text-100"

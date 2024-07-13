@@ -38,7 +38,7 @@ export const OptionsProduct = ({ id }: Pick<Product, "id">) => {
       {
         popup && (
           <Popup>
-            <div className="p-4 bg-bg-100 shadow-button rounded-lg w-3/4 max-w-sm">
+            <div className="p-4 bg-bg-50 shadow-button rounded-lg w-3/4 max-w-sm">
               <p className="text-text-100 text-center mb-3">¿Deseas eliminar este producto?</p>
               <hr className="border-bg-300 mb-3" />
               <footer className="flex items-center justify-end gap-3">

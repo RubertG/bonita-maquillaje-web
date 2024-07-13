@@ -10,7 +10,7 @@ export function useForm<Inputs extends FieldValues = FieldValues, TypeSchema ext
   actionSubmit
 } : {
   schema: TypeSchema
-  actionSubmit: (data: Inputs) => void
+  actionSubmit: (data: Inputs) => Promise<void>
 }) {
   const {
     register,
@@ -24,7 +24,7 @@ export function useForm<Inputs extends FieldValues = FieldValues, TypeSchema ext
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setLoading(true)
-    actionSubmit(data)
+    await actionSubmit(data)
     setLoading(false)
   }
 

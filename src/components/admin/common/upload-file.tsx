@@ -3,13 +3,12 @@
 import { Delete } from "@/components/common/icons"
 import { FileInput } from "@/components/common/input"
 import { LIMIT_FILES_SIZE } from "@/consts/admin/admin"
-import { FileStateItem } from "@/types/admin/admin"
 import { ChangeEvent, useState } from "react"
 
 interface Props {
   className?: string
-  items: FileStateItem[]
-  setItems: (items: FileStateItem[]) => void
+  items: File[]
+  setItems: (items: File[]) => void
 }
 
 function returnFileSize(number: number) {
@@ -35,7 +34,7 @@ export const UploadFile = ({
 
     if (event.target.files) {
       const files = Array.from(event.target.files)
-      const newItems: FileStateItem[] = []
+      const newItems: File[] = []
       let filesSizes = items.reduce((total, item) => total + item.size, 0)
 
       for (const file of files) {
@@ -47,11 +46,7 @@ export const UploadFile = ({
           continue
         }
 
-        newItems.push({
-          name: file.name,
-          size: file.size,
-          url: URL.createObjectURL(file)
-        })
+        newItems.push(file)
       }
 
       setTotalSize(filesSizes)
@@ -59,7 +54,7 @@ export const UploadFile = ({
     }
   }
 
-  const handleDelete = (item: FileStateItem) => {
+  const handleDelete = (item: File) => {
     setError("")
     setTotalSize(totalSize - items.find((it) => it.name === item.name)!.size)
     setItems(items.filter((it) => it.name !== item.name))
@@ -88,7 +83,7 @@ export const UploadFile = ({
                 <img
                   className="w-16 object-cover rounded-lg aspect-[3/4]"
                   loading="lazy"
-                  src={item.url} alt={`${item.name} - Bonita Maquillaje`}
+                  src={URL.createObjectURL(item)} alt={`${item.name} - Bonita Maquillaje`}
                   title={`${item.name} - Bonita Maquillaje`} />
                 <div className="w-full overflow-hidden">
                   <p className="font-light text-text-200 whitespace-nowrap overflow-hidden text-ellipsis"

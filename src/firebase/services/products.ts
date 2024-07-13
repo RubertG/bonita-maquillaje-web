@@ -4,17 +4,22 @@ import { ROUTES_COLLECTIONS } from "@/consts/db/db"
 import { Id, Product } from "@/types/db/db"
 
 interface Query {
-  category?: Id | undefined
-  search?: Id | undefined
+  category: Id
+  search: Id
 }
 
 export const getProducts = async ({ category, search }: Query) => {
-  const q = query(collection(db, ROUTES_COLLECTIONS.PRODUCTS), where('category', '==', category || ""), where('name', '>=', search || ""))
+  const q = query(collection(db, ROUTES_COLLECTIONS.PRODUCTS),
+    where('category', '==', category)
+  )
   const querySnapshot = await getDocs(q)
   const products: Product[] = []
 
   querySnapshot.forEach(doc => {
-    products.push(doc.data() as Product)
+    const name = doc.data().name.toLocaleLowerCase()
+    if (name.includes(search.toLocaleLowerCase())) {
+      products.push(doc.data() as Product)
+    }
   })
 
   return products
