@@ -18,13 +18,17 @@ export const ProductsContainer = async ({
     <section className={`${className} text-center text-text-300`}>
       No se encontraron productos :(
       <article className="mt-3 mx-auto">
-        <ButtonWithIcon
-          href={`/admin/productos?${new URLSearchParams({
-            categoria: searchParams.categoria || ""
-          }).toString()}`}>
-          <Delete className="stroke-text-100" />
-          Quitar filtros
-        </ButtonWithIcon>
+        {
+          (searchParams.busqueda) && (
+            <ButtonWithIcon
+              href={`/admin/productos?${new URLSearchParams({
+                categoria: searchParams.categoria || ""
+              }).toString()}`}>
+              <Delete className="stroke-text-100" />
+              Quitar filtros
+            </ButtonWithIcon>
+          )
+        }
       </article>
     </section>
   )

@@ -1,4 +1,4 @@
-import { ProductForm } from "@/components/admin/products/product-form"
+import { CreateProductForm } from "@/components/admin/products/create-product-form"
 import { BackButton } from "@/components/common/back-button"
 import { H1 } from "@/components/common/h1"
 
@@ -8,7 +8,7 @@ export default function CreateProductPage() {
       <BackButton
         href="/admin/productos" />
       <H1 className="mb-6 mt-2">Crear producto</H1>
-      <ProductForm />
+      <CreateProductForm />
     </main>
   )
 }

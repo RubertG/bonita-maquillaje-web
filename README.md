@@ -27,10 +27,24 @@ La página web tiene en su home page su Linkstree con sus redes sociales, ubicac
   [x] Acomplar componentes para la pagina de productos
   [x] Crear los estilos para la pagina de productos
 
-- Crear ramas internas de la pagina de productos (Crear categoria, agregar producto, editar producto)
-  [] pagina para crear producto
-  [] Componente para subir imagenes del producto
-  [] Endpoint donde llegaran las imagenes y mandarlas a firebase despues de validarlas
+- Crear ramas internas de la pagina de productos (agregar producto)
+  [x] pagina para crear producto
+  [x] Componente para subir imagenes del producto
+  [x] Endpoint donde llegaran las imagenes y mandarlas a firebase despues de validarlas
+  [x] campos del formulario validados 
+  [x] Conectar con firebase para subir el producto creado
+  [x] Pruebas
+
+- Crear ramas internas de la pagina de productos (Crear categoria)
+  [x] pagina para crear categoria
   [] campos del formulario validados 
-  [] Conectar con firebase para subir el producto creado
+  [] componente para subir imagenes de la categoria [que pese por mucho 1Mb]
+  [] Conectar con firebase para subir la categoria creada
+  [] Pruebas
+
+- Crear ramas internas de la pagina de productos (Editar categoria)
+  [] pagina para editar categoria
+  [] campos del formulario usando el de crear producto (Pasarle los valores que tiene por defecto) 
+  [] componente para subir imagenes de la categoria (que pese por mucho 3Mb. Que cargue las imagenes que ya tenia el producto en firebase)
+  [] Conectar con firebase para subir el producto editado
   [] Pruebas

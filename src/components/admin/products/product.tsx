@@ -23,7 +23,7 @@ export const Product = ({ imgs, name, price, stock, id }: ProductType) => {
           </p>
         </div>
       </div>
-      <OptionsProduct id={id} />
+      <OptionsProduct id={id} imgs={imgs} />
     </li>
   )
 }

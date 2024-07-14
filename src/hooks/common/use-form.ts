@@ -7,10 +7,12 @@ import { z } from "zod"
 
 export function useForm<Inputs extends FieldValues = FieldValues, TypeSchema extends z.ZodType = z.ZodType<Inputs>>({
   schema,
-  actionSubmit
-} : {
+  actionSubmit,
+  values
+}: {
   schema: TypeSchema
   actionSubmit: (data: Inputs) => Promise<void>
+  values?: Inputs
 }) {
   const {
     register,
@@ -18,6 +20,7 @@ export function useForm<Inputs extends FieldValues = FieldValues, TypeSchema ext
     setError,
     formState: { errors }
   } = useFormReactHook<Inputs>({
+    values,
     resolver: zodResolver(schema)
   })
   const [loading, setLoading] = useState(false)

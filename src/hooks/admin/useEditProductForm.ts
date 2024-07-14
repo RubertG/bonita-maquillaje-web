@@ -1,28 +1,31 @@
 "use client"
 
-import { FileStateItem } from "@/types/admin/admin"
+import { FileStateItem, Inputs } from "@/types/admin/admin"
 import { Category, Product, Tone as ToneType } from "@/types/db/db"
 import { useRouter } from "next/navigation"
 import { BaseSyntheticEvent, useEffect, useState } from "react"
 import { useForm } from "../common/use-form"
 import { productSchema } from "@/validations/admin/products/product-schema"
-import { v4 as uuidv4 } from 'uuid'
-import { saveProduct } from "@/firebase/services/products"
+import { getProduct, updateProduct } from "@/firebase/services/products"
 import { getCategories } from "@/firebase/services/categories"
 import { saveFile } from "@/firebase/services/storage"
 
-interface Inputs {
-  name: string
-  description: string
-  price: string
-  stock: string
-  category: string
+interface Props {
+  id: string
 }
 
-export const useProductForm = () => {
+export const useEditProductForm = ({ id }: Props) => {
   const [imgs, setImgs] = useState<File[]>([])
+  const [defaultValues, setDefaultValues] = useState<Inputs>({
+    name: "",
+    description: "",
+    price: "",
+    stock: "",
+    category: ""
+  })
   const [categories, setCategories] = useState<Pick<Category, "name" | "id">[]>([])
   const [errorImgs, setErrorImgs] = useState("")
+  const [imgsOld, setImgsOld] = useState<FileStateItem[]>([])
   const [tones, setTones] = useState<ToneType[]>([])
   const [error, setError] = useState<string>("")
   const router = useRouter()
@@ -30,10 +33,13 @@ export const useProductForm = () => {
   const {
     register, handleSubmit, loading, errors
   } = useForm<Inputs>({
+    values: defaultValues,
     schema: productSchema,
     actionSubmit: async (data) => {
       setError("")
-      if (imgs.length === 0) {
+      setErrorImgs("")
+      
+      if (imgs.length === 0 && imgsOld.length === 0) {
         setErrorImgs("Se requiere cargar imagenes")
         return
       }
@@ -52,21 +58,40 @@ export const useProductForm = () => {
 
         const product: Product = {
           ...data,
-          id: uuidv4(),
-          imgs: newImgs,
-          stock: parseInt(data.stock),
+          id,
+          imgs: [...imgsOld,...newImgs],
+          tones,
           price: parseFloat(data.price),
-          tones: tones
+          stock: parseInt(data.stock)
         }
 
-        await saveProduct(product)
+        console.log(product.imgs)
+
+        await updateProduct(product)
         router.push("/admin/productos")
+        router.refresh()
       } catch (error) {
         setError("Ocurrio un error al guardar el producto")
       }
-
     }
   })
+
+  useEffect(() => {
+    const getP = async () => {
+      const p = await getProduct(id)
+      if (!p) return
+      setDefaultValues({
+        name: p.name,
+        description: p.description,
+        price: p.price.toString(),
+        stock: p.stock.toString(),
+        category: p.category
+      })
+      setTones(p.tones)
+      setImgsOld(p.imgs)
+    }
+    getP()
+  }, [])
 
   useEffect(() => {
     const getC = async () => {
@@ -103,6 +128,9 @@ export const useProductForm = () => {
     register,
     loading,
     setTones,
-    tones
+    tones,
+    defaultValues,
+    imgsOld,
+    setImgsOld
   }
 }

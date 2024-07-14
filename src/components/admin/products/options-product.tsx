@@ -1,20 +1,21 @@
 "use client"
 
-import { Delete, Edit, Spinner } from "@/components/common/icons"
-import { Popup } from "@/components/common/popup"
+import { Delete, Edit } from "@/components/common/icons"
 import { deleteProduct } from "@/firebase/services/products"
+import { deleteFile } from "@/firebase/services/storage"
 import { Product } from "@/types/db/db"
-import clsx from "clsx"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { PopupDelete } from "../common/popup-delete"
 
-export const OptionsProduct = ({ id }: Pick<Product, "id">) => {
+export const OptionsProduct = ({ id, imgs }: Pick<Product, "id" | "imgs">) => {
   const [popup, setPopup] = useState(false)
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
   const handleDelete = async () => {
     setLoading(true)
+    await Promise.all(imgs.map(img => deleteFile(`products/${img.name}`)))
     await deleteProduct(id)
     router.refresh()
     setLoading(false)
@@ -26,7 +27,7 @@ export const OptionsProduct = ({ id }: Pick<Product, "id">) => {
   return (
     <div className="flex flex-col gap-2">
       <button
-        onClick={handlePopup}
+        onClick={() => router.push(`/admin/productos/editar-producto/${id}`)}
       >
         <Edit className="stroke-principal-200 lg:hover:scale-110 lg:transition-transform" />
       </button>
@@ -37,25 +38,12 @@ export const OptionsProduct = ({ id }: Pick<Product, "id">) => {
       </button>
       {
         popup && (
-          <Popup>
-            <div className="p-4 bg-bg-50 shadow-button rounded-lg w-3/4 max-w-sm">
-              <p className="text-text-100 text-center mb-3">¿Deseas eliminar este producto?</p>
-              <hr className="border-bg-300 mb-3" />
-              <footer className="flex items-center justify-end gap-3">
-                <button
-                  className="text-text-200 lg:hover:text-text-50 lg:transition-colors flex items-center justify-center"
-                  onClick={handleDelete}>
-                  <Spinner className={clsx("w-5 h-5 absolute transition-opacity", {
-                    "opacity-0": !loading
-                  })} />
-                  <p className={clsx("transition-opacity", { "opacity-0": loading })}>Eliminar</p>
-                </button>
-                <button
-                  className="py-2.5 px-3.5 rounded-lg bg-accent-200 text-text-100 text-center shadow-button lg:hover:bg-principal-100 lg:transition-colors"
-                  onClick={handlePopup}>Cancelar</button>
-              </footer>
-            </div>
-          </Popup>
+          <PopupDelete
+            title="¿Deseas eliminar este producto?"
+            handleDelete={handleDelete}
+            loading={loading}
+            handlePopup={handlePopup}
+          />
         )
       }
     </div>

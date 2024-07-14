@@ -18,7 +18,7 @@ export const Category = ({ img, name, id }: CategoryType) => {
     >
       <img
         src={img}
-        className="w-14 h-14 object-cover m-auto mb-1 aspect-square"
+        className="w-14 h-14 object-cover m-auto mb-1 aspect-square rounded-lg"
         title={`${name} - Bonita Maquillaje`}
         loading="lazy"
         alt={`${name} - Bonita Maquillaje`} />

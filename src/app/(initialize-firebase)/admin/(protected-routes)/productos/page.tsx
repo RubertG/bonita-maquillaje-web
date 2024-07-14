@@ -1,5 +1,5 @@
-import { CategoriesContainer } from "@/components/admin/products/categories-container"
-import { CategoriesSkeletonContainer } from "@/components/admin/products/categories-skeleton-container"
+import { CategoriesContainer } from "@/components/admin/categories/categories-container"
+import { CategoriesSkeletonContainer } from "@/components/admin/categories/categories-skeleton-container"
 import { ProductsContainer } from "@/components/admin/products/products-container"
 import { ProductsSkeletonContainer } from "@/components/admin/products/products-skeleton-container"
 import { ButtonWithIcon } from "@/components/common/button-with-icon"
