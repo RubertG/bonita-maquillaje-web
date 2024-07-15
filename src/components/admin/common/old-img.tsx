@@ -12,10 +12,11 @@ export const OldImg = ({
   aspect
 }: {
   item: FileStateItem
-  handleDeleteOld: (item: FileStateItem) => void
+  handleDeleteOld: (item: FileStateItem) => Promise<void>
   aspect: string
 }) => {
   const [popup, setPopup] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const handlePopup = () => setPopup(!popup)
 
@@ -50,9 +51,14 @@ export const OldImg = ({
         popup &&
         <PopupDelete
           title="¿Deseas eliminar esta imagen?"
-          handleDelete={() => handleDeleteOld(item)}
+          handleDelete={async () => {
+            setLoading(true)
+            await handleDeleteOld(item)
+            setLoading(false)
+            setPopup(false)
+          }}
           handlePopup={handlePopup}
-          loading={false}
+          loading={loading}
         />
       }
     </li>

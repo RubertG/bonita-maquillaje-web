@@ -10,7 +10,7 @@ export interface Tone {
 export interface Category {
   id: Id
   name: string
-  img: string
+  img: FileStateItem
 }
 
 export interface Product {

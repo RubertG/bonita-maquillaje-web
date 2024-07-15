@@ -35,16 +35,23 @@ La página web tiene en su home page su Linkstree con sus redes sociales, ubicac
   [x] Conectar con firebase para subir el producto creado
   [x] Pruebas
 
-- Crear ramas internas de la pagina de productos (Crear categoria)
-  [x] pagina para crear categoria
-  [] campos del formulario validados 
-  [] componente para subir imagenes de la categoria [que pese por mucho 1Mb]
-  [] Conectar con firebase para subir la categoria creada
-  [] Pruebas
+- Crear ramas internas de la pagina de productos (Editar producto)
+  [x] pagina para editar producto
+  [x] campos del formulario usando el de crear producto (Pasarle los valores que tiene por defecto) 
+  [x] componente para subir imagenes de la producto (que pese por mucho 3Mb. Que cargue las imagenes que ya tenia el producto en firebase)
+  [x] Conectar con firebase para subir el producto editado
+  [x] Pruebas
 
-- Crear ramas internas de la pagina de productos (Editar categoria)
-  [] pagina para editar categoria
-  [] campos del formulario usando el de crear producto (Pasarle los valores que tiene por defecto) 
-  [] componente para subir imagenes de la categoria (que pese por mucho 3Mb. Que cargue las imagenes que ya tenia el producto en firebase)
-  [] Conectar con firebase para subir el producto editado
-  [] Pruebas
+- Crear ramas internas de la pagina de categorias (Crear categoria)
+  [x] pagina para crear categoria
+  [x] campos del formulario validados 
+  [x] componente para subir imagenes de la categoria [que pese por mucho 500Kb]
+  [x] Conectar con firebase para subir la categoria creada
+  [x] Pruebas
+
+- Crear ramas internas de la pagina de categorias (Editar categoria)
+  [x] pagina para editar categoria
+  [x] campos del formulario validados (al pasarle los valores que tiene por defecto)
+  [x] componente para subir imagenes de la categoria [que pese por mucho 500Kb]
+  [x] Conectar con firebase para subir la categoria creada
+  [x] Pruebas

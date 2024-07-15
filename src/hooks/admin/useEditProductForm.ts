@@ -38,7 +38,7 @@ export const useEditProductForm = ({ id }: Props) => {
     actionSubmit: async (data) => {
       setError("")
       setErrorImgs("")
-      
+
       if (imgs.length === 0 && imgsOld.length === 0) {
         setErrorImgs("Se requiere cargar imagenes")
         return
@@ -64,8 +64,6 @@ export const useEditProductForm = ({ id }: Props) => {
           price: parseFloat(data.price),
           stock: parseInt(data.stock)
         }
-
-        console.log(product.imgs)
 
         await updateProduct(product)
         router.push("/admin/productos")
@@ -111,9 +109,6 @@ export const useEditProductForm = ({ id }: Props) => {
 
   const onSubmit = (e: BaseSyntheticEvent) => {
     e.preventDefault()
-    if (imgs.length === 0) {
-      setErrorImgs("Se requiere cargar imagenes")
-    }
     handleSubmit(e)
   }
 

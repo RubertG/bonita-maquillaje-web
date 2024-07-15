@@ -3,11 +3,11 @@
 import { Delete } from "@/components/common/icons"
 import { FileInput } from "@/components/common/input"
 import { LIMIT_FILES_SIZE } from "@/consts/admin/admin"
-import { deleteFile } from "@/firebase/services/storage"
 import { FileStateItem } from "@/types/admin/admin"
 import { returnFileSize } from "@/utils/return-file-size"
-import { ChangeEvent, InputHTMLAttributes, useEffect, useState } from "react"
+import { InputHTMLAttributes } from "react"
 import { OldImg } from "./old-img"
+import { useUploadFile } from "@/hooks/common/use-upload-file"
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   className?: string
@@ -18,6 +18,8 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   imgsOld?: FileStateItem[]
   setImgsOld?: (imgs: FileStateItem[]) => void
   setItems: (items: File[]) => void
+  refCollection?: string
+  fixedSize?: number
 }
 
 export const UploadFile = ({
@@ -30,75 +32,18 @@ export const UploadFile = ({
   imgsOld,
   setImgsOld,
   multiple = true,
+  refCollection = "products",
   ...props
 }: Props) => {
-  const [error, setError] = useState("")
-  const [totalSize, setTotalSize] = useState(0)
-
-  useEffect(() => {
-    if (imgsOld) {
-      setTotalSize(totalSize + imgsOld.reduce((total, item) => total + item.size, 0))
-    }
-  }, [imgsOld])
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setError("")
-
-    if (event.target.files) {
-      const files = Array.from(event.target.files)
-
-      if (!multiple) {
-        const file = files[0]
-
-        if (!file) return
-
-        if (file.size > limitSize) {
-          setError(`El archivo pasa el límite de tamaño (${returnFileSize(limitSize)})`)
-          return
-        }
-
-        setTotalSize(file.size)
-        setItems([file])
-        return
-      }
-
-      const newItems: File[] = []
-      let filesSizes = items.reduce((total, item) => total + item.size, 0)
-      
-      for (const file of files) {
-        filesSizes += file.size
-
-        if (filesSizes > limitSize) {
-          filesSizes -= file.size
-          setError(`Se alcanzó el límite del tamaño de los archivos (${returnFileSize(limitSize)})`)
-          continue
-        }
-
-        newItems.push(file)
-      }
-
-      if (imgsOld) {
-        setTotalSize(filesSizes + imgsOld.reduce((total, item) => total + item.size, 0))
-      } else {
-        setTotalSize(filesSizes)
-      }
-      setItems([...items, ...newItems])
-    }
-  }
-
-  const handleDelete = (item: File) => {
-    setError("")
-    setTotalSize(totalSize - items.find((it) => it.name === item.name)!.size)
-  }
-
-  const handleDeleteOld = async (item: FileStateItem) => {
-    setError("")
-    setTotalSize(totalSize - item.size)
-    await deleteFile(`products/${item.name}`)
-    if (setImgsOld && imgsOld) {
-      setImgsOld(imgsOld.filter((it) => it.name !== item.name))
-    }
-  }
+  const { handleChange, totalSize, handleDeleteOld, handleDelete, error } = useUploadFile({
+      items,
+      limitSize,
+      setItems,
+      imgsOld,
+      setImgsOld,
+      multiple,
+      refCollection
+    })
 
   return (
     <section className={`${className}`}>

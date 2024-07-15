@@ -6,21 +6,34 @@ import { Button } from "@/components/common/button"
 import { Save, Spinner } from "@/components/common/icons"
 import clsx from "clsx"
 import { useCategoryForm } from "@/hooks/admin/useCategoryForm"
+import { PopupDelete } from "../common/popup-delete"
 
-export const CategoryForm = () => {
+interface Props {
+  className?: string
+  id?: string
+}
+
+export const CategoryForm = ({
+  className, id
+}: Props) => {
   const {
-    error, errorImgs, errors, imgs, loading, onSubmit, register, setImgs
-  } = useCategoryForm()
+    error, errorImgs, errors,
+    imgs, loading, onSubmit,
+    register, setImgs, imgOld, setImgOld,
+    handleDelete, handlePopup, loadingDelete, popup
+  } = useCategoryForm(id)
 
   return (
-    <section className="max-w-xl mx-auto">
+    <section className={`max-w-xl mx-auto ${className}`}>
       <UploadFile
         aspect="1/1"
         limitSize={LIMIT_FILE_SIZE}
-        className="mt-5"
-        classNameError="-mt-1 mb-5"
+        classNameError="mt-2 mb-5"
         multiple={false}
+        setImgsOld={setImgOld}
         items={imgs}
+        refCollection="categories"
+        imgsOld={imgOld}
         setItems={setImgs} />
       {(errorImgs) && <p className="text-red-500 font-light px-3.5 -mt-5 mb-4 text-sm">{errorImgs}</p>}
 
@@ -41,7 +54,7 @@ export const CategoryForm = () => {
         {errors.name?.message && <p className="text-red-500 font-light px-3.5 mb-4 mt-2 text-sm">{errors.name?.message}</p>}
 
         <Button
-          className="w-full my-5"
+          className="w-full mt-5"
         >
           <Save className="absolute top-1/2 -translate-y-1/2 left-0 ml-3.5 stroke-text-100" />
           <Spinner className={clsx("w-5 h-5 absolute opacity-0 transition-opacity", { "opacity-100": loading })} />
@@ -49,6 +62,28 @@ export const CategoryForm = () => {
         </Button>
         {(error) && <p className="text-red-500 font-light px-3.5 mt-5 text-sm">{error}</p>}
       </form>
+      <footer className="flex items-center justify-end mt-3">
+        {
+          id && (
+            <button
+              onClick={handlePopup}
+              className="mt-5 text-text-100 font-light"
+            >
+              Borrar categoría
+            </button>
+          )
+        }
+        {
+          popup && (
+            <PopupDelete
+              title="¿Deseas borrar esta categoría?"
+              handleDelete={handleDelete}
+              handlePopup={handlePopup}
+              loading={loadingDelete}
+            />
+          )
+        }
+      </footer>
     </section>
   )
 }

@@ -17,7 +17,7 @@ export const Category = ({ img, name, id }: CategoryType) => {
       href={`?categoria=${id}`}
     >
       <img
-        src={img}
+        src={img.url}
         className="w-14 h-14 object-cover m-auto mb-1 aspect-square rounded-lg"
         title={`${name} - Bonita Maquillaje`}
         loading="lazy"

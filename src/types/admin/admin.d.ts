@@ -4,6 +4,10 @@ export interface FileStateItem {
   size: number
 }
 
+export interface CategoryInputs {
+  name: string
+}
+
 export interface Inputs {
   name: string
   description: string
