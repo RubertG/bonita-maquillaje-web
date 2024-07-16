@@ -1,17 +1,47 @@
-import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore"
+import { collection, deleteDoc, doc, DocumentData, getDoc, getDocs, limit, orderBy, query, QueryDocumentSnapshot, setDoc, startAfter, updateDoc } from "firebase/firestore"
 import { db } from "../initializeApp"
 import { ROUTES_COLLECTIONS } from "@/consts/db/db"
 import { Order } from "@/types/db/db"
+import { LIMIT_ORDERS_PER_PAGE } from "@/consts/admin/orders"
 
-export const getOrders = async () => {
-  const querySnapshot = await getDocs(collection(db, ROUTES_COLLECTIONS.ORDERS))
+export const getFirstOrders = async () => {
+  const q = query(collection(
+    db, ROUTES_COLLECTIONS.ORDERS),
+    orderBy("create_at", "desc"),
+    limit(LIMIT_ORDERS_PER_PAGE)
+  )
+  const querySnapshot = await getDocs(q)
   const orders: Order[] = []
 
   querySnapshot.forEach(doc => {
     orders.push(doc.data() as Order)
   })
 
-  return orders
+  return {
+    orders,
+    lastVisible: querySnapshot.docs[querySnapshot.docs.length - 1]
+  }
+}
+
+export const getNextOrders = async (lastVisible: QueryDocumentSnapshot<DocumentData, DocumentData>) => {
+  const q = query(collection(
+    db, ROUTES_COLLECTIONS.ORDERS),
+    orderBy('create_at', 'desc'),
+    limit(LIMIT_ORDERS_PER_PAGE),
+    startAfter(lastVisible)
+  )
+  const querySnapshot = await getDocs(q)
+  const orders: Order[] = []
+
+  querySnapshot.forEach(doc => {
+    orders.push(doc.data() as Order)
+  })
+
+  return {
+    orders,
+    lastVisible: querySnapshot.docs[querySnapshot.docs.length - 1],
+    hasNext: querySnapshot.size === 20
+  }
 }
 
 export const getOrder = async (id: string) => {

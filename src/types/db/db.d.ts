@@ -1,3 +1,4 @@
+import { Timestamp } from "firebase/firestore"
 import { FileStateItem } from "../admin/admin"
 
 export type Id = string
@@ -32,7 +33,9 @@ export interface Order {
   department: string
   city: string
   address: string
+  state: boolean
   products: Array<Id>
+  create_at: Timestamp
 }
 
 export interface DiscountCode {

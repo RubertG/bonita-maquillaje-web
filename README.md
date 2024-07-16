@@ -27,7 +27,7 @@ La página web tiene en su home page su Linkstree con sus redes sociales, ubicac
   [x] Acomplar componentes para la pagina de productos
   [x] Crear los estilos para la pagina de productos
 
-- Crear ramas internas de la pagina de productos (agregar producto)
+- Crear pagina de productos (agregar producto)
   [x] pagina para crear producto
   [x] Componente para subir imagenes del producto
   [x] Endpoint donde llegaran las imagenes y mandarlas a firebase despues de validarlas
@@ -35,23 +35,35 @@ La página web tiene en su home page su Linkstree con sus redes sociales, ubicac
   [x] Conectar con firebase para subir el producto creado
   [x] Pruebas
 
-- Crear ramas internas de la pagina de productos (Editar producto)
+- Crear pagina de productos (Editar producto)
   [x] pagina para editar producto
   [x] campos del formulario usando el de crear producto (Pasarle los valores que tiene por defecto) 
   [x] componente para subir imagenes de la producto (que pese por mucho 3Mb. Que cargue las imagenes que ya tenia el producto en firebase)
   [x] Conectar con firebase para subir el producto editado
   [x] Pruebas
 
-- Crear ramas internas de la pagina de categorias (Crear categoria)
+- Crear pagina de categorias (Crear categoria)
   [x] pagina para crear categoria
   [x] campos del formulario validados 
   [x] componente para subir imagenes de la categoria [que pese por mucho 500Kb]
   [x] Conectar con firebase para subir la categoria creada
   [x] Pruebas
 
-- Crear ramas internas de la pagina de categorias (Editar categoria)
+- Crear pagina de categorias (Editar categoria)
   [x] pagina para editar categoria
   [x] campos del formulario validados (al pasarle los valores que tiene por defecto)
   [x] componente para subir imagenes de la categoria [que pese por mucho 500Kb]
   [x] Conectar con firebase para subir la categoria creada
   [x] Pruebas
+
+- Crear pagina de los pedidos (Ver pedidos)
+  [x] pagina para ver pedidos
+  [x] Conectar con firebase para traer los pedidos
+  [x] Conectar componentes para mostrar los pedidos (Con sus funcionalidades de borrar y link a pagina editar)
+  [x] Paginacion de los pedidos (que solo aparezcan 20 ultimos pedidos por pagina)
+  [] Buscador por nombre del cliente  
+
+- Crear pagina de los pedidos (Editar pedido)
+  [] pagina para ver pedido
+  [] Conectar con firebase para traer el pedido
+  [] Conectar componentes para mostrar el pedido
