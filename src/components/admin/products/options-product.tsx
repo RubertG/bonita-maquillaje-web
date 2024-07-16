@@ -7,6 +7,7 @@ import { Product } from "@/types/db/db"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { PopupDelete } from "../common/popup-delete"
+import Link from "next/link"
 
 export const OptionsProduct = ({ id, imgs }: Pick<Product, "id" | "imgs">) => {
   const [popup, setPopup] = useState(false)
@@ -26,12 +27,14 @@ export const OptionsProduct = ({ id, imgs }: Pick<Product, "id" | "imgs">) => {
 
   return (
     <div className="flex flex-col gap-2">
-      <button
-        onClick={() => router.push(`/admin/productos/editar-producto/${id}`)}
+      <Link
+        title="Editar producto"
+        href={`/admin/productos/editar-producto/${id}`}
       >
         <Edit className="stroke-principal-200 lg:hover:scale-110 lg:transition-transform" />
-      </button>
+      </Link>
       <button
+        title="Eliminar producto"
         onClick={handlePopup}
       >
         <Delete className="stroke-text-300 lg:hover:scale-110 lg:transition-transform" />

@@ -80,7 +80,11 @@ export const useCategoryForm = (id?: string) => {
   })
 
   useEffect(() => {
+    setImgOld([])
+    setImgs([])
+    
     if (id) {
+
       const getC = async () => {
         const category = await getCategory(id)
 
@@ -96,7 +100,6 @@ export const useCategoryForm = (id?: string) => {
     }
 
     setDefaultValues({ name: "" })
-    setImgOld([])
   }, [id])
 
   useEffect(() => {
