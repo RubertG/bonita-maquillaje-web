@@ -82,6 +82,8 @@ export const useCategoryForm = (id?: string) => {
   useEffect(() => {
     setImgOld([])
     setImgs([])
+    setErrorImgs("")
+    setError("")
     
     if (id) {
 
