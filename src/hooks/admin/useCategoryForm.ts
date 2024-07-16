@@ -108,6 +108,11 @@ export const useCategoryForm = (id?: string) => {
 
   const onSubmit = async (e: BaseSyntheticEvent) => {
     e.preventDefault()
+
+    if (imgs.length === 0 && imgOld.length === 0) {
+      setErrorImgs("Se requiere cargar imagenes")
+    }
+
     await handleSubmit(e)
   }
 

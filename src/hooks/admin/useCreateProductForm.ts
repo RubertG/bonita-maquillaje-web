@@ -25,6 +25,7 @@ export const useCreateProductForm = () => {
     schema: productSchema,
     actionSubmit: async (data) => {
       setError("")
+
       if (imgs.length === 0) {
         setErrorImgs("Se requiere cargar imagenes")
         return
@@ -77,12 +78,14 @@ export const useCreateProductForm = () => {
     setErrorImgs("")
   }, [imgs])
 
-  const onSubmit = (e: BaseSyntheticEvent) => {
+  const onSubmit = async (e: BaseSyntheticEvent) => {
     e.preventDefault()
+
     if (imgs.length === 0) {
       setErrorImgs("Se requiere cargar imagenes")
     }
-    handleSubmit(e)
+    
+    await handleSubmit(e)
   }
 
   return {

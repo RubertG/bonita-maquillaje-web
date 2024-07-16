@@ -107,9 +107,15 @@ export const useEditProductForm = ({ id }: Props) => {
     setErrorImgs("")
   }, [imgs])
 
-  const onSubmit = (e: BaseSyntheticEvent) => {
+  const onSubmit = async (e: BaseSyntheticEvent) => {
     e.preventDefault()
-    handleSubmit(e)
+    
+    if (imgs.length === 0 && imgsOld.length === 0) {
+      setErrorImgs("Se requiere cargar imagenes")
+      return
+    }
+
+    await handleSubmit(e)
   }
 
   return {
