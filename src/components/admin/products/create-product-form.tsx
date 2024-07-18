@@ -1,7 +1,7 @@
 "use client"
 
 import { UploadFile } from "../common/upload-file"
-import { useCreateProductForm } from "@/hooks/admin/useCreateProductForm"
+import { useCreateProductForm } from "@/hooks/admin/products/use-create-product-form"
 import { ProductForm } from "./product-form"
 
 export const CreateProductForm = () => {

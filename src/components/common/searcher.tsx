@@ -2,7 +2,8 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { Search } from "./icons"
-import { FormEvent, useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
+import { useDebouncedCallback } from "use-debounce"
 
 export const Searcher = ({
   className, placeholder
@@ -13,42 +14,46 @@ export const Searcher = ({
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const inputRef = useRef<HTMLInputElement>(null)
+  const [search, setSearch] = useState(searchParams.get("busqueda"))
   const router = useRouter()
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    const data = new FormData(event.currentTarget)
-    const searchValue = data.get("search")
+  const handleSearch = () => {
     const categoriaValue = searchParams.get("categoria")
 
     const url = new URLSearchParams({
-      ...((searchValue) && { busqueda: searchValue.toString() }),
+      ...((search) && { busqueda: search }),
       ...((categoriaValue) && { categoria: categoriaValue })
     })
 
     router.replace(`${pathname}?${url.toString()}`)
   }
 
+  const handleChange = useDebouncedCallback(handleSearch, 200)
+
   useEffect(() => {
-    if (inputRef.current) {
+    if (inputRef.current && !searchParams.get("busqueda")) {
       inputRef.current.value = ""
     }
-  }, [searchParams.get("categoria")])
+  }, [searchParams.get("busqueda")])
 
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={(e) => {
+        e.preventDefault()
+        handleSearch()
+      }}
+      onChange={handleChange}
       className={`flex items-center justify-between w-full bg-bg-50 rounded-lg pr-2.5 gap-1.5 shadow-button ${className} max-w-2xl mx-auto`}>
       <input
         className="w-full rounded-lg pl-3.5 py-2.5 focus:outline-none text-text-200 font-light placeholder:text-gray-400"
         placeholder={placeholder ? placeholder : "Busca el producto que quieres..."}
         name="search"
         autoComplete="off"
+        onChange={(e) => setSearch(e.target.value)}
         ref={inputRef}
         defaultValue={searchParams.get("busqueda") || ""}
         type="text" />
-      <button
-        type="submit">
+      <button>
         <Search className="stroke-text-200 w-8" />
       </button>
     </form>

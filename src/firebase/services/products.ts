@@ -5,10 +5,9 @@ import { Id, Product } from "@/types/db/db"
 
 interface Query {
   category: Id
-  search: Id
 }
 
-export const getProducts = async ({ category, search }: Query) => {
+export const getProducts = async ({ category }: Query) => {
   const q = query(collection(db, ROUTES_COLLECTIONS.PRODUCTS),
     where('category', '==', category)
   )
@@ -16,10 +15,7 @@ export const getProducts = async ({ category, search }: Query) => {
   const products: Product[] = []
 
   querySnapshot.forEach(doc => {
-    const name = doc.data().name.toLocaleLowerCase()
-    if (name.includes(search.toLocaleLowerCase())) {
-      products.push(doc.data() as Product)
-    }
+    products.push(doc.data() as Product)
   })
 
   return products

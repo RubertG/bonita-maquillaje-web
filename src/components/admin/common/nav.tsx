@@ -1,11 +1,12 @@
 'use client'
 
 import { singOutSession } from "@/firebase/services/auth"
+import { getCategories } from "@/firebase/services/categories"
 import { branch } from "@/fonts/branch/branch"
 import clsx from "clsx"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const links = [
   {
@@ -32,7 +33,16 @@ const links = [
 
 export function Nav() {
   const [open, setOpen] = useState(false)
+  const [firstCategory, setFirstCategory] = useState<string>("")
   const pathname = usePathname()
+
+  useEffect(() => {
+    const getFirstCategory = async () => {
+      const category = await getCategories()
+      setFirstCategory(category[0].id)
+    }
+    getFirstCategory()
+  }, [])
 
   return (
     <nav
@@ -62,6 +72,20 @@ export function Nav() {
           {
             links.map((link) => {
               const isActive = pathname.startsWith(link.href)
+
+              if (link.href === "/admin/productos") {
+                return (
+                  <li key={link.name}>
+                    <Link
+                      href={link.href + "/?categoria=" + firstCategory}
+                      className={clsx("block py-2 px-3 lg:py-1 w-full border-b border-bg-200 lg:border-0 lg:hover:bg-bg-300 lg:rounded-lg lg:transition-colors", {
+                        "text-accent-300 lg:hover:text-text-100 font-normal": isActive
+                      })}>
+                      {link.name}
+                    </Link>
+                  </li>
+                )
+              }
 
               return (
                 <li key={link.name}>

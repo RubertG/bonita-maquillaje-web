@@ -1,4 +1,4 @@
-import { collection, deleteDoc, doc, DocumentData, getDoc, getDocs, limit, orderBy, query, QueryDocumentSnapshot, setDoc, startAfter, updateDoc } from "firebase/firestore"
+import { collection, deleteDoc, doc, DocumentData, getDoc, getDocs, limit, orderBy, query, QueryDocumentSnapshot, setDoc, startAfter, updateDoc, where } from "firebase/firestore"
 import { db } from "../initializeApp"
 import { ROUTES_COLLECTIONS } from "@/consts/db/db"
 import { Order } from "@/types/db/db"
@@ -8,6 +8,7 @@ export const getFirstOrders = async () => {
   const q = query(collection(
     db, ROUTES_COLLECTIONS.ORDERS),
     orderBy("create_at", "desc"),
+    where("state", "==", false),
     limit(LIMIT_ORDERS_PER_PAGE)
   )
   const querySnapshot = await getDocs(q)
@@ -27,6 +28,7 @@ export const getNextOrders = async (lastVisible: QueryDocumentSnapshot<DocumentD
   const q = query(collection(
     db, ROUTES_COLLECTIONS.ORDERS),
     orderBy('create_at', 'desc'),
+    where("state", "==", false),
     limit(LIMIT_ORDERS_PER_PAGE),
     startAfter(lastVisible)
   )

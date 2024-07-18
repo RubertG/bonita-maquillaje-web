@@ -67,3 +67,5 @@ La página web tiene en su home page su Linkstree con sus redes sociales, ubicac
   [] pagina para ver pedido
   [] Conectar con firebase para traer el pedido
   [] Conectar componentes para mostrar el pedido
+
+  hacer que se haga la peticion por categorias para traer los productos de la categoria seleccionada y ahorrar petiociones

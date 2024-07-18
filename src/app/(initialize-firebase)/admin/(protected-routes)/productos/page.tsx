@@ -1,26 +1,13 @@
 import { CategoriesContainer } from "@/components/admin/categories/categories-container"
 import { CategoriesSkeletonContainer } from "@/components/admin/categories/categories-skeleton-container"
 import { ProductsContainer } from "@/components/admin/products/products-container"
-import { ProductsSkeletonContainer } from "@/components/admin/products/products-skeleton-container"
 import { ButtonWithIcon } from "@/components/common/button-with-icon"
 import { H1 } from "@/components/common/h1"
 import { Store } from "@/components/common/icons"
 import { Searcher } from "@/components/common/searcher"
-import { getCategories } from "@/firebase/services/categories"
-import { redirect } from "next/navigation"
 import { Suspense } from "react"
 
-async function ProductsPage({
-  searchParams
-}: {
-  searchParams: { [key: string]: string | undefined }
-}) {
-  const { categoria: category } = searchParams
-
-  if (!category) {
-    const categories = await getCategories()
-    return redirect(`/admin/productos?categoria=${categories[0].id}`)
-  }
+async function ProductsPage() {
 
   return (
     <main
@@ -39,9 +26,7 @@ async function ProductsPage({
       <Suspense fallback={<CategoriesSkeletonContainer className="mt-6 lg:mt-4" />}>
         <CategoriesContainer className="mt-6 lg:mt-4" />
       </Suspense>
-      <Suspense fallback={<ProductsSkeletonContainer className="mt-6" />}>
-        <ProductsContainer className="mt-6" searchParams={searchParams} />
-      </Suspense>
+      <ProductsContainer className="mt-6" />
     </main>
   )
 }

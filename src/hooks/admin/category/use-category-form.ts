@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation"
 import { BaseSyntheticEvent, useEffect, useState } from "react"
-import { useForm } from "../common/use-form"
+import { useForm } from "../../common/use-form"
 import { categorySchema } from "@/validations/admin/products/category"
 import { deleteFile, saveFile } from "@/firebase/services/storage"
 import { v4 as uuidv4 } from "uuid"

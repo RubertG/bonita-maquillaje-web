@@ -1,3 +1,5 @@
+import { Params } from "next/dist/shared/lib/router/utils/route-matcher"
+
 export interface FileStateItem {
   name: string
   url: string
@@ -14,4 +16,11 @@ export interface Inputs {
   price: string
   stock: string
   category: string
+}
+
+export interface ProductsContext {
+  products: Product[]
+  refreshProducts: (category: string) => Promise<void>
+  loading: boolean
+  searchParams: Params
 }

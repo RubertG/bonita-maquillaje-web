@@ -4,21 +4,23 @@ import { Delete, Edit } from "@/components/common/icons"
 import { deleteProduct } from "@/firebase/services/products"
 import { deleteFile } from "@/firebase/services/storage"
 import { Product } from "@/types/db/db"
-import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { PopupDelete } from "../common/popup-delete"
 import Link from "next/link"
+import { useProductsContext } from "@/hooks/admin/products/use-products-context"
+import { useSearchParams } from "next/navigation"
 
 export const OptionsProduct = ({ id, imgs }: Pick<Product, "id" | "imgs">) => {
   const [popup, setPopup] = useState(false)
   const [loading, setLoading] = useState(false)
-  const router = useRouter()
+  const searchParams = useSearchParams()
+  const { refreshProducts } = useProductsContext()
 
   const handleDelete = async () => {
     setLoading(true)
-    await Promise.all(imgs.map(img => deleteFile(`products/${img.name}`)))
     await deleteProduct(id)
-    router.refresh()
+    await Promise.all(imgs.map(img => deleteFile(`products/${img.name}`)))
+    refreshProducts(searchParams.get("categoria") || "")
     setLoading(false)
     setPopup(false)
   }

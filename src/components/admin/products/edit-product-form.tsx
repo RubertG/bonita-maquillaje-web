@@ -1,6 +1,6 @@
 "use client"
 
-import { useEditProductForm } from "@/hooks/admin/useEditProductForm"
+import { useEditProductForm } from "@/hooks/admin/products/use-edit-product-form"
 import { UploadFile } from "../common/upload-file"
 import { ProductForm } from "./product-form"
 

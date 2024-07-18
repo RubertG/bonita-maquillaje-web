@@ -5,7 +5,7 @@ import { LIMIT_FILE_SIZE } from "@/consts/admin/admin"
 import { Button } from "@/components/common/button"
 import { Save, Spinner } from "@/components/common/icons"
 import clsx from "clsx"
-import { useCategoryForm } from "@/hooks/admin/useCategoryForm"
+import { useCategoryForm } from "@/hooks/admin/category/use-category-form"
 import { PopupDelete } from "../common/popup-delete"
 
 interface Props {
