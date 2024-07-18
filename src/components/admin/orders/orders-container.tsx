@@ -81,7 +81,7 @@ export const OrdersContainer = ({
         }
       </ul>
       {
-        hasNext && (
+        hasNext && !loading && (
           <footer
             className="flex justify-end items-center mt-7"
           >

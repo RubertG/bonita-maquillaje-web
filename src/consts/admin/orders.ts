@@ -1,1 +1,1 @@
-export const LIMIT_ORDERS_PER_PAGE = 12
+export const LIMIT_ORDERS_PER_PAGE = 18

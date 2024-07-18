@@ -4,7 +4,7 @@ import { OptionsProduct } from "./options-product"
 export const Product = ({ imgs, name, price, stock, id }: ProductType) => {
   return (
     <li
-      className="flex w-full gap-2 items-start rounded-lg justify-between lg:p-2 lg:hover:bg-bg-200 lg:transition-colors"
+      className="flex w-full gap-2 items-start rounded-lg justify-between lg:p-2 lg:hover:bg-bg-200 lg:transition-colors entry"
     >
       <div className="flex gap-2 items-center justify-between overflow-hidden">
         <img
