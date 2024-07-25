@@ -8,7 +8,9 @@ import { useEffect, useState } from "react"
 
 interface ProductType { [key: string]: Product[] }
 
-export const useProducts = (pathName: string = "/admin/productos") => {
+const pathNames = ["/admin/productos", "/catalogo"]
+
+export const useProducts = () => {
   const [products, setProducts] = useState<ProductType>({})
   const [productsFilter, setProductsFilter] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
@@ -17,7 +19,7 @@ export const useProducts = (pathName: string = "/admin/productos") => {
   const router = useRouter()
 
   useEffect(() => {
-    if (pathNameOriginal !== pathName) return
+    if (!pathNames.find((pn) => pathNameOriginal === pn)) return
     fetchProducts(searchParams.get("busqueda") || "", searchParams.get("categoria") || "")
   }, [searchParams])
 
@@ -55,7 +57,7 @@ export const useProducts = (pathName: string = "/admin/productos") => {
         categoria: c
       })
 
-      router.replace(`${pathName}?${url.toString()}`)
+      router.replace(`${pathNameOriginal}?${url.toString()}`)
       setLoading(false)
       return
     }

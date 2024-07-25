@@ -28,7 +28,7 @@ export const Searcher = ({
     router.replace(`${pathname}?${url.toString()}`)
   }
 
-  const handleChange = useDebouncedCallback(handleSearch, 200)
+  const handleChange = useDebouncedCallback(handleSearch, 350)
 
   useEffect(() => {
     if (inputRef.current && !searchParams.get("busqueda")) {

@@ -1,43 +1,105 @@
 "use client"
 
 import { LIMIT_ORDERS_PER_PAGE } from "@/consts/admin/orders"
-import { getFirstOrders, getNextOrders } from "@/firebase/services/orders"
-import { Order } from "@/types/db/db"
-import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore"
+import { getFirstOrders, getNextOrders, getOrdersSearch } from "@/firebase/services/orders"
 import { useEffect, useState } from "react"
 import { OrderCard } from "./order-card"
 import { OrderSkeleton } from "./order-skeleton"
 import { branch } from "@/fonts/branch/branch"
+import { useSearchParams } from "next/navigation"
+import { Order } from "@/types/db/db"
+import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore"
 
 interface Props {
   className?: string
 }
 
+const setStorage = (o: Order[], l: QueryDocumentSnapshot<DocumentData, DocumentData>, h: boolean) => {
+  localStorage.setItem("orders", JSON.stringify(o))
+  localStorage.setItem("lastVisible", JSON.stringify(l))
+  localStorage.setItem("hasNext", JSON.stringify(h))
+}
+
 export const OrdersContainer = ({
   className
 }: Props) => {
-  const [orders, setOrders] = useState<Order[] | undefined>([])
-  const [loading, setLoading] = useState(true)
-  const [lastVisible, setLastVisible] = useState<QueryDocumentSnapshot<DocumentData, DocumentData>>()
-  const [hasNext, setHasNext] = useState(true)
+  const [orders, setOrders] = useState<Order[] | undefined>(() => {
+    const orders = localStorage.getItem("orders")
+    if (!orders) return []
+    return JSON.parse(orders)
+  })
+  const [lastVisible, setLastVisible] = useState<QueryDocumentSnapshot<DocumentData, DocumentData> | undefined>(() => {
+    const lastVisible = localStorage.getItem("lastVisible")
+    if (!lastVisible) return undefined
+    return JSON.parse(lastVisible)
+  })
+  const [hasNext, setHasNext] = useState(() => {
+    const hasNext = localStorage.getItem("hasNext")
+    if (!hasNext) return false
+    return JSON.parse(hasNext)
+  })
+  const [loading, setLoading] = useState(false)
+  const searchParams = useSearchParams()
 
   useEffect(() => {
-    const getOrders = async () => {
-      setLoading(true)
-      const { orders: o, lastVisible: l } = await getFirstOrders()
+    const handleBeforeUnload = () => {
+      localStorage.removeItem('orders')
+      localStorage.removeItem('lastVisible')
+      localStorage.removeItem('hasNext')
+    }
 
-      if (!orders) {
+    window.addEventListener('beforeunload', handleBeforeUnload)
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload)
+    }
+  }, [])
+
+  useEffect(() => {
+    const search = searchParams.get("busqueda")
+
+    if (!search) {
+      if (orders && orders.length > 0) return
+      getOrders()
+      return
+    }
+
+    const handleSearch = async () => {
+      setLoading(true)
+      const { orders: o } = await getOrdersSearch(search)
+
+      if (!o) {
         setOrders(undefined)
       } else {
         setOrders(o)
       }
 
-      setLastVisible(l)
-      setHasNext(o.length === LIMIT_ORDERS_PER_PAGE)
+      setLastVisible(undefined)
+      setHasNext(false)
       setLoading(false)
     }
-    getOrders()
-  }, [])
+
+    handleSearch()
+  }, [searchParams.get("busqueda")])
+
+  const getOrders = async () => {
+    if (orders && orders.length > 0 && searchParams.get("busqueda")) return
+
+    setLoading(true)
+    const { orders: o, lastVisible: l } = await getFirstOrders()
+
+    if (!o) {
+      setOrders(undefined)
+    } else {
+      setOrders(o)
+    }
+
+    const h = o.length === LIMIT_ORDERS_PER_PAGE
+    setStorage(o, l, h)
+    setLastVisible(l)
+    setHasNext(h)
+    setLoading(false)
+  }
 
   if (!orders) return (
     <section className={`${className} text-center text-text-300`}>
@@ -55,9 +117,11 @@ export const OrdersContainer = ({
       setOrders(undefined)
     }
 
-    setOrders([...orders, ...o])
+    const h = o.length === LIMIT_ORDERS_PER_PAGE
+    const newOrders = [...orders, ...o]
+    setOrders(newOrders)
     setLastVisible(l)
-    setHasNext(o.length === LIMIT_ORDERS_PER_PAGE)
+    setHasNext(h)
     setLoading(false)
   }
 
@@ -65,16 +129,18 @@ export const OrdersContainer = ({
     <section className={className}>
       <ul className={`${className} grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-2`}>
         {
-          orders.map((order) => (
-            <OrderCard
-              key={order.id}
-              {...order}
-            />
-          ))
+          (
+            orders.map((order) => (
+              <OrderCard
+                key={order.id}
+                {...order}
+              />
+            ))
+          )
         }
         {
-          loading && (
-            Array(LIMIT_ORDERS_PER_PAGE).fill(0).map((_, index) => (
+          loading && orders.length === 0 && (
+            Array(6).fill(0).map((_, index) => (
               <OrderSkeleton key={index} />
             ))
           )

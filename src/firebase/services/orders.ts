@@ -24,6 +24,29 @@ export const getFirstOrders = async () => {
   }
 }
 
+export const getOrdersSearch = async (search: string) => {
+  const q = query(collection(
+    db, ROUTES_COLLECTIONS.ORDERS),
+    orderBy("create_at", "desc"),
+    where("state", "==", false),
+    limit(LIMIT_ORDERS_PER_PAGE)
+  )
+  const querySnapshot = await getDocs(q)
+  const orders: Order[] = []
+
+  querySnapshot.forEach(doc => {
+    const orderName = doc.data().name as string
+
+    if (orderName.toLocaleLowerCase().includes(search.toLocaleLowerCase())) {
+      orders.push(doc.data() as Order)
+    }
+  })
+
+  return {
+    orders
+  }
+}
+
 export const getNextOrders = async (lastVisible: QueryDocumentSnapshot<DocumentData, DocumentData>) => {
   const q = query(collection(
     db, ROUTES_COLLECTIONS.ORDERS),
