@@ -1,5 +1,6 @@
 import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore"
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher"
+import { Product as ProductDB } from "../db/db"
 
 export interface FileStateItem {
   name: string
@@ -31,4 +32,12 @@ export interface OrdersManagementStorage {
   loading: boolean
   lastVisible: QueryDocumentSnapshot<DocumentData, DocumentData>
   hasNext: boolean
+}
+
+export interface Product extends ProductDB {
+  amount: number
+  discountCode?: {
+    code: Id
+    discount: number
+  }
 }

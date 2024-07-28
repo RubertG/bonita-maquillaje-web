@@ -1,18 +1,44 @@
 "use client"
 
 import { DetailedHTMLProps, forwardRef, InputHTMLAttributes, LegacyRef, useState } from "react"
-import { Eye, EyeOff, Selector, Upload } from "./icons"
+import { Eye, EyeOff, Selector, Spinner, Upload } from "./icons"
 import clsx from "clsx"
 import { branch } from "@/fonts/branch/branch"
 import { Category } from "@/types/db/db"
 
-interface InputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {}
+interface InputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> { }
 
 export const Input = forwardRef(function Input({ className, ...props }: InputProps, ref: LegacyRef<HTMLInputElement> | undefined) {
   return (
     <input className={`w-full rounded-lg px-3.5 py-2.5 focus:outline-bg-200 bg-bg-50 text-text-200 font-light placeholder:text-gray-400 shadow-button ${className}`} {...props} {...(ref == undefined) ? {} : { ref }} />
   )
 })
+
+interface DiscountCodeInputProps extends InputProps {
+  onClickButton: (discountCode: string) => void
+  loading?: boolean
+}
+
+export const DiscountCodeInput = ({ className, onClickButton, loading, ...props }: DiscountCodeInputProps) => {
+  const [code, setCode] = useState("")
+
+  return (
+    <div className="rounded-lg overflow-hidden flex">
+      <input
+        className={`w-full rounded-l-lg px-3.5 py-2.5 focus:outline-bg-200 bg-bg-50 text-text-200 font-light placeholder:text-gray-400 shadow-button ${className}`}
+        onChange={(e) => setCode(e.target.value)}
+        {...props} />
+      <button
+        type="button"
+        onClick={() => onClickButton(code)}
+        className="px-3.5 py-2.5 bg-accent-200 lg:hover:bg-principal-100 lg:transition-colors text-text-100 relative inline-flex items-center justify-center"
+      >
+        <Spinner className={clsx("w-5 h-5 absolute opacity-0 transition-opacity", { "opacity-100": loading })} />
+        <p className={clsx("transition-opacity", { "opacity-0": loading })}>Aplicar</p>
+      </button>
+    </div>
+  )
+}
 
 export const PasswordInput = forwardRef(function PasswordInput({ className, ...props }: InputProps, ref: LegacyRef<HTMLInputElement> | undefined) {
   const [showPassword, setShowPassword] = useState(false)
@@ -69,7 +95,7 @@ export const SelectInput = forwardRef(function SelectInput({ className, items, t
         <option
           className="text-text-300 font-light py-1 bg-bg-50 hover:bg-bg-200"
           disabled
-          selected 
+          selected
           value="">{title}</option>
         {items?.map((item) => (
           <option
@@ -83,7 +109,7 @@ export const SelectInput = forwardRef(function SelectInput({ className, items, t
   )
 })
 
-interface TextAreaProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement> {}
+interface TextAreaProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement> { }
 
 export const TextArea = forwardRef(function TextArea({ className, ...props }: TextAreaProps, ref: LegacyRef<HTMLTextAreaElement> | undefined) {
   return (

@@ -64,9 +64,9 @@ La página web tiene en su home page su Linkstree con sus redes sociales, ubicac
   [] Buscador por nombre del cliente  
 
 - Crear pagina de los pedidos (Editar pedido)
-  [] pagina para ver pedido
-  [] Conectar con firebase para traer el pedido
-  [] Conectar componentes para mostrar el pedido
-
-Guardar pedidos en el local storage para no hacer las peticiones todas las veces
-corregir el ver las fechas cuando se cargaron e el local storage 
+  [x] pagina para ver pedido
+  [x] Conectar con firebase para traer el pedido
+  [x] Tabla de resumen de la compra
+  [] Componentes del formulario 
+  [] Conectar con hook del formularios para los errorres
+  [] Pruebas

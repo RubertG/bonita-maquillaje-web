@@ -16,7 +16,7 @@ export const getDiscountCodes = async () => {
 
 export const getDiscountCode = async (code: string) => {
   const collectionRef = collection(db, ROUTES_COLLECTIONS.DISCOUNT_CODES)
-  const q = query(collectionRef, where('name', '==', code))
+  const q = query(collectionRef, where('code', '==', code))
   const querySnapshot = await getDocs(q)
   const results: DiscountCode[] = []
 

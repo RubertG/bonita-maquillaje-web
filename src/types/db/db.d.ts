@@ -34,7 +34,13 @@ export interface Order {
   city: string
   address: string
   state: boolean
-  products: Array<Id>
+  products: {
+    id: Id
+    discountCode?: {
+      code: Id
+      discount: number
+    }
+  }[]
   create_at: Timestamp
 }
 
@@ -42,5 +48,6 @@ export interface DiscountCode {
   id: Id
   code: string
   discount: number
-  expiration: Date
-}
+  expiration: Timestamp
+  category: Id | null
+} 

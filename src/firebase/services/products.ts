@@ -21,6 +21,23 @@ export const getProducts = async ({ category }: Query) => {
   return products
 }
 
+export const getAllProducts = async (search?: string) => {
+  const querySnapshot = await getDocs(collection(db, ROUTES_COLLECTIONS.PRODUCTS))
+  const products: Product[] = []
+
+  querySnapshot.forEach(doc => {
+    if (search) {
+      if (doc.data().name.toLocaleLowerCase().includes(search.toLocaleLowerCase())) {
+        products.push(doc.data() as Product)
+      }
+    } else {
+      products.push(doc.data() as Product)
+    }
+  })
+
+  return products
+}
+
 export const getProduct = async (id: string) => {
   const docRef = doc(db, ROUTES_COLLECTIONS.PRODUCTS, id)
   const docSnap = await getDoc(docRef)

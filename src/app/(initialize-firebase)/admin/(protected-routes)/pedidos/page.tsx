@@ -14,7 +14,7 @@ function OrdesPage() {
         <Searcher placeholder="Buscar pedido por nombre del cliente..." />
         <ButtonWithIcon
           className="w-full sm:w-auto mt-5 sm:mt-0 sm:py-2 whitespace-nowrap"
-          href="/admin/productos/crear-pedido">
+          href="/admin/pedidos/crear-pedido">
           <Store className="absolute top-1/2 -translate-y-1/2 left-0 ml-3.5 sm:relative sm:top-0 sm:translate-y-0 sm:ml-0 stroke-text-100 w-6" />
           Agregar pedido
         </ButtonWithIcon>

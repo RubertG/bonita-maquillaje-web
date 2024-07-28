@@ -20,6 +20,12 @@ const setStorage = (o: Order[], l: QueryDocumentSnapshot<DocumentData, DocumentD
   localStorage.setItem("hasNext", JSON.stringify(h))
 }
 
+const removeStorage = () => {
+  localStorage.removeItem("orders")
+  localStorage.removeItem("lastVisible")
+  localStorage.removeItem("hasNext")
+}
+
 export const OrdersContainer = ({
   className
 }: Props) => {
@@ -42,16 +48,10 @@ export const OrdersContainer = ({
   const searchParams = useSearchParams()
 
   useEffect(() => {
-    const handleBeforeUnload = () => {
-      localStorage.removeItem('orders')
-      localStorage.removeItem('lastVisible')
-      localStorage.removeItem('hasNext')
-    }
-
-    window.addEventListener('beforeunload', handleBeforeUnload)
+    window.addEventListener('beforeunload', removeStorage)
 
     return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload)
+      window.removeEventListener('beforeunload', removeStorage)
     }
   }, [])
 
@@ -74,6 +74,7 @@ export const OrdersContainer = ({
         setOrders(o)
       }
 
+      removeStorage()
       setLastVisible(undefined)
       setHasNext(false)
       setLoading(false)
