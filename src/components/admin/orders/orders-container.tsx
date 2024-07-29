@@ -9,21 +9,10 @@ import { branch } from "@/fonts/branch/branch"
 import { useSearchParams } from "next/navigation"
 import { Order } from "@/types/db/db"
 import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore"
+import { removeStorage, setStorage } from "@/utils/orders-strorage"
 
 interface Props {
   className?: string
-}
-
-const setStorage = (o: Order[], l: QueryDocumentSnapshot<DocumentData, DocumentData>, h: boolean) => {
-  localStorage.setItem("orders", JSON.stringify(o))
-  localStorage.setItem("lastVisible", JSON.stringify(l))
-  localStorage.setItem("hasNext", JSON.stringify(h))
-}
-
-const removeStorage = () => {
-  localStorage.removeItem("orders")
-  localStorage.removeItem("lastVisible")
-  localStorage.removeItem("hasNext")
 }
 
 export const OrdersContainer = ({
@@ -45,7 +34,15 @@ export const OrdersContainer = ({
     return JSON.parse(hasNext)
   })
   const [loading, setLoading] = useState(false)
+  const [reload, setReload] = useState(false)
   const searchParams = useSearchParams()
+
+  useEffect(() => {
+    if (reload) {
+      getOrders()
+      setReload(false)
+    }
+  }, [reload])
 
   useEffect(() => {
     window.addEventListener('beforeunload', removeStorage)
@@ -134,6 +131,7 @@ export const OrdersContainer = ({
             orders.map((order) => (
               <OrderCard
                 key={order.id}
+                setReload={setReload}
                 {...order}
               />
             ))

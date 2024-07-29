@@ -67,6 +67,7 @@ La página web tiene en su home page su Linkstree con sus redes sociales, ubicac
   [x] pagina para ver pedido
   [x] Conectar con firebase para traer el pedido
   [x] Tabla de resumen de la compra
+  [] componente aplicacar descuento
   [] Componentes del formulario 
   [] Conectar con hook del formularios para los errorres
   [] Pruebas

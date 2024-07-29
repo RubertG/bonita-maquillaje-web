@@ -29,7 +29,7 @@ export const AddProductCard = ({
           src={product.imgs[0].url} alt={`${product.name} - Bonita Maquillaje`}
           title={`${product.name} - Bonita Maquillaje`} />
         <div className="flex flex-col items-start justify-start gap-1">
-          <h3 className="text-lg text-text-100 text-ellipsis overflow-hidden whitespace-nowrap"
+          <h3 className="lg:text-lg text-text-100 text-ellipsis overflow-hidden whitespace-nowrap"
             title={product.name}
           >
             {product.name}
@@ -95,7 +95,7 @@ export const DeleteProductCard = ({
           src={product.imgs[0].url} alt={`${product.name} - Bonita Maquillaje`}
           title={`${product.name} - Bonita Maquillaje`} />
         <div className="flex flex-col items-start justify-start gap-1">
-          <h3 className="text-lg text-text-100 text-ellipsis overflow-hidden whitespace-nowrap"
+          <h3 className="lg:text-lg text-text-100 text-ellipsis overflow-hidden whitespace-nowrap"
             title={product.name}
           >
             {product.name}

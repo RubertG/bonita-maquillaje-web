@@ -2,9 +2,11 @@ import { Order } from "@/types/db/db"
 import { OptionsOrderCard } from "./options-order-card"
 import Skeleton from "react-loading-skeleton"
 
-interface Props extends Order { }
+interface Props extends Order { 
+  setReload: React.Dispatch<React.SetStateAction<boolean>>
+}
 
-export const OrderCard = ({ name, create_at, id }: Props) => {
+export const OrderCard = ({ name, create_at, id, products, setReload }: Props) => {
   const getDate = () => {
     try {
       return create_at.toDate().toLocaleDateString('es-ES', {
@@ -34,7 +36,7 @@ export const OrderCard = ({ name, create_at, id }: Props) => {
         >
           {name}
         </h3>
-        <p className="text-sm font-light text-text-200">
+        <p className="text-sm font-light text-text-200 text-ellipsis overflow-hidden whitespace-nowrap">
           {
             getDate() === "" ? (
               <Skeleton
@@ -43,10 +45,10 @@ export const OrderCard = ({ name, create_at, id }: Props) => {
             ) : (
               date
             )
-          }
+          } - {products.length} productos
         </p>
       </div>
-      <OptionsOrderCard id={id} />
+      <OptionsOrderCard id={id} setReload={setReload} />
     </li>
   )
 }

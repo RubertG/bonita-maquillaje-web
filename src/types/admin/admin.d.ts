@@ -20,8 +20,18 @@ export interface Inputs {
   category: string
 }
 
+export interface InputsOrders {
+  name: string,
+  department: string,
+  city: string,
+  address: string,
+  email: string,
+  paymentMethod: string,
+  phone: string
+}
+
 export interface ProductsContext {
-  products: Product[]
+  products: ProductDB[]
   refreshProducts: (category: string) => Promise<void>
   loading: boolean
   searchParams: Params

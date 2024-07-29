@@ -2,12 +2,12 @@
 
 import { getAllProducts } from "@/firebase/services/products"
 import { Product } from "@/types/admin/admin"
-import { useRouter, useSearchParams } from "next/navigation"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { ProductsContainer } from "./products-container"
 import { DeleteProductCard } from "./product-card"
 import clsx from "clsx"
-import { ProductsSummary } from "./products-summary"
+import { ProductsSummary } from "../../common/products-summary"
+import { SearcherClient } from "@/components/common/searcher"
 
 interface Props {
   products: Product[]
@@ -30,9 +30,7 @@ export const ProductsForm = ({
   searchedProducts,
   className
 }: Props) => {
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const search = searchParams.get("busqueda")
+  const [search, setSearch] = useState<string | undefined>()
 
   useEffect(() => {
     if (search && search !== "") {
@@ -70,6 +68,10 @@ export const ProductsForm = ({
     })
   }, [search])
 
+  useEffect(() => {
+    setSearch("")
+  }, [products])
+
   const getP = async () => {
     const p = await getAllProducts(search || "")
     const parseProducts: Product[] = p.map((p) => ({
@@ -88,7 +90,6 @@ export const ProductsForm = ({
       original: searchedProducts.original.filter((p) => p.id !== product.id),
       filtered: []
     })
-    router.replace(`/admin/pedidos/crear-pedido`)
   }
 
   const handleDeleteProduct = (product: Product) => {
@@ -129,42 +130,49 @@ export const ProductsForm = ({
   }
 
   return (
-    <section className={`relative ${className}`}>
-      {
-        search && (
-          <ProductsContainer
-            className={clsx(`absolute w-full top-0 left-0 z-30 ${className}`, {
-              "mt-4": products.length === 0,
-              "": products.length !== 0
-            })}
-            changeCount={handleChangeCountFilters}
-            searchedProducts={searchedProducts.filtered}
-            handleSelectProduct={handleSelectProduct} />
-        )
-      }
-      {
-        products.length > 0 && (
-          <ul className="flex flex-col gap-2 md:gap-0 mt-4">
-            {
-              products.map((product) => (
-                <DeleteProductCard
-                  key={product.id}
-                  changeCount={handleChangeCount}
-                  onClick={handleDeleteProduct}
-                  product={product}
-                />
-              ))
-            }
-          </ul>
-        )
-      }
-      {
-        products.length > 0 && (
-          <ProductsSummary
-            className="mt-4"
-            products={products} />
-        )
-      }
-    </section>
+    <>
+      <SearcherClient
+        search={search || ""}
+        setSearch={setSearch}
+        placeholder="Buscar producto a agregar..."
+      />
+      <section className={`relative ${className}`}>
+        {
+          search && (
+            <ProductsContainer
+              className={clsx(`absolute w-full top-0 left-0 z-30 ${className}`, {
+                "mt-4": products.length === 0,
+                "": products.length !== 0
+              })}
+              changeCount={handleChangeCountFilters}
+              searchedProducts={searchedProducts.filtered}
+              handleSelectProduct={handleSelectProduct} />
+          )
+        }
+        {
+          products.length > 0 && (
+            <ul className="flex flex-col gap-2 md:gap-0 mt-4">
+              {
+                products.map((product) => (
+                  <DeleteProductCard
+                    key={product.id}
+                    changeCount={handleChangeCount}
+                    onClick={handleDeleteProduct}
+                    product={product}
+                  />
+                ))
+              }
+            </ul>
+          )
+        }
+        {
+          products.length > 0 && (
+            <ProductsSummary
+              className="mt-4"
+              products={products} />
+          )
+        }
+      </section>
+    </>
   )
 }

@@ -5,3 +5,10 @@ export const LOCAL_STORAGE = {
   LAST_VISIBLE: "lastVisible",
   HAS_NEXT: "hasNext"
 }
+
+export const ALL_CATEGORY = "all"
+
+export const PAYMENT_METHODS = [
+  "Efectivo en Cúcuta",
+  "Transferencia"
+]

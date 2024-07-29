@@ -4,29 +4,36 @@ import { DetailedHTMLProps, forwardRef, InputHTMLAttributes, LegacyRef, useState
 import { Eye, EyeOff, Selector, Spinner, Upload } from "./icons"
 import clsx from "clsx"
 import { branch } from "@/fonts/branch/branch"
-import { Category } from "@/types/db/db"
 
 interface InputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> { }
 
 export const Input = forwardRef(function Input({ className, ...props }: InputProps, ref: LegacyRef<HTMLInputElement> | undefined) {
   return (
-    <input className={`w-full rounded-lg px-3.5 py-2.5 focus:outline-bg-200 bg-bg-50 text-text-200 font-light placeholder:text-gray-400 shadow-button ${className}`} {...props} {...(ref == undefined) ? {} : { ref }} />
+    <input
+      className={`w-full rounded-lg px-3.5 py-2.5 focus:outline-bg-200 bg-bg-50 text-text-200 font-light placeholder:text-gray-400 shadow-button ${className}`}
+      {...props}
+      {...(ref == undefined) ? {} : { ref }}
+    />
   )
 })
 
 interface DiscountCodeInputProps extends InputProps {
   onClickButton: (discountCode: string) => void
   loading?: boolean
+  setError?: (error: string) => void
 }
 
-export const DiscountCodeInput = ({ className, onClickButton, loading, ...props }: DiscountCodeInputProps) => {
+export const DiscountCodeInput = ({ className, onClickButton, loading, setError, ...props }: DiscountCodeInputProps) => {
   const [code, setCode] = useState("")
 
   return (
-    <div className="rounded-lg overflow-hidden flex">
+    <div className="rounded-lg overflow-hidden flex shadow-button">
       <input
-        className={`w-full rounded-l-lg px-3.5 py-2.5 focus:outline-bg-200 bg-bg-50 text-text-200 font-light placeholder:text-gray-400 shadow-button ${className}`}
-        onChange={(e) => setCode(e.target.value)}
+        className={`w-full rounded-l-lg px-3.5 py-2.5 focus:outline-bg-200 bg-bg-50 text-text-200 font-light placeholder:text-gray-400 ${className}`}
+        onChange={(e) => {
+          setError && setError("")
+          setCode(e.target.value)
+        }}
         {...props} />
       <button
         type="button"
@@ -81,7 +88,10 @@ export const FileInput = forwardRef(function FileInput({ className, multiple, ..
 })
 
 interface SelectInputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> {
-  items?: Pick<Category, "name" | "id">[]
+  items?: {
+    name: string
+    id: string
+  }[]
   title: string
 }
 
@@ -96,6 +106,7 @@ export const SelectInput = forwardRef(function SelectInput({ className, items, t
           className="text-text-300 font-light py-1 bg-bg-50 hover:bg-bg-200"
           disabled
           selected
+          aria-selected
           value="">{title}</option>
         {items?.map((item) => (
           <option

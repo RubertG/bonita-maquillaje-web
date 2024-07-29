@@ -40,6 +40,7 @@ export interface Order {
       code: Id
       discount: number
     }
+    amount: number
   }[]
   create_at: Timestamp
 }
@@ -49,5 +50,5 @@ export interface DiscountCode {
   code: string
   discount: number
   expiration: Timestamp
-  category: Id | null
+  category?: Id
 } 
