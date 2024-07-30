@@ -1,12 +1,12 @@
 "use client"
 
 import { LIMIT_ORDERS_PER_PAGE } from "@/consts/admin/orders"
-import { getFirstOrders, getNextOrders, getOrdersSearch } from "@/firebase/services/orders"
+import { getFirstOrders, getNextOrders } from "@/firebase/services/orders"
 import { useEffect, useState } from "react"
 import { OrderCard } from "./order-card"
 import { OrderSkeleton } from "./order-skeleton"
 import { branch } from "@/fonts/branch/branch"
-import { useSearchParams } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { Order } from "@/types/db/db"
 import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore"
 import { removeStorage, setStorage } from "@/utils/orders-strorage"
@@ -18,10 +18,19 @@ interface Props {
 export const OrdersContainer = ({
   className
 }: Props) => {
-  const [orders, setOrders] = useState<Order[] | undefined>(() => {
+  const [orders, setOrders] = useState<{
+    orders: Order[]
+    filterOrders: Order[]
+  } | undefined>(() => {
     const orders = localStorage.getItem("orders")
-    if (!orders) return []
-    return JSON.parse(orders)
+    if (!orders) return {
+      orders: [],
+      filterOrders: []
+    }
+    return {
+      orders: JSON.parse(orders),
+      filterOrders: JSON.parse(orders)
+    }
   })
   const [lastVisible, setLastVisible] = useState<QueryDocumentSnapshot<DocumentData, DocumentData> | undefined>(() => {
     const lastVisible = localStorage.getItem("lastVisible")
@@ -36,6 +45,8 @@ export const OrdersContainer = ({
   const [loading, setLoading] = useState(false)
   const [reload, setReload] = useState(false)
   const searchParams = useSearchParams()
+  const router = useRouter()
+  const search = searchParams.get("busqueda")
 
   useEffect(() => {
     if (reload) {
@@ -53,43 +64,61 @@ export const OrdersContainer = ({
   }, [])
 
   useEffect(() => {
-    const search = searchParams.get("busqueda")
+    if (!orders || orders.orders.length === 0) {
+      getOrders()
+      return
+    }
 
     if (!search) {
-      if (orders && orders.length > 0) return
-      getOrders()
+      setOrders({
+        ...orders,
+        filterOrders: JSON.parse(JSON.stringify(orders.orders))
+      })
       return
     }
 
     const handleSearch = async () => {
       setLoading(true)
-      const { orders: o } = await getOrdersSearch(search)
+      const newOrders = orders?.orders.filter(order => order.name.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
 
-      if (!o) {
-        setOrders(undefined)
-      } else {
-        setOrders(o)
+      if (!newOrders) {
+        setOrders({
+          ...orders,
+          filterOrders: []
+        })
       }
 
+      setOrders({
+        ...orders,
+        filterOrders: newOrders
+      })
+
       removeStorage()
-      setLastVisible(undefined)
-      setHasNext(false)
       setLoading(false)
     }
 
     handleSearch()
-  }, [searchParams.get("busqueda")])
+  }, [search])
 
   const getOrders = async () => {
-    if (orders && orders.length > 0 && searchParams.get("busqueda")) return
-
     setLoading(true)
     const { orders: o, lastVisible: l } = await getFirstOrders()
 
     if (!o) {
       setOrders(undefined)
     } else {
-      setOrders(o)
+      if (search) {
+        const newOrders = o.filter(order => order.name.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
+        setOrders({
+          orders: o,
+          filterOrders: newOrders
+        })
+      } else {
+        setOrders({
+          orders: o,
+          filterOrders: o
+        })
+      }
     }
 
     const h = o.length === LIMIT_ORDERS_PER_PAGE
@@ -108,6 +137,7 @@ export const OrdersContainer = ({
   const getMoreOrders = async () => {
     if (!lastVisible) return
 
+    router.replace("/admin/pedidos")
     setLoading(true)
     const { orders: o, lastVisible: l } = await getNextOrders(lastVisible)
 
@@ -116,8 +146,11 @@ export const OrdersContainer = ({
     }
 
     const h = o.length === LIMIT_ORDERS_PER_PAGE
-    const newOrders = [...orders, ...o]
-    setOrders(newOrders)
+    const newOrders = [...orders.orders, ...o]
+    setOrders({
+      orders: newOrders,
+      filterOrders: newOrders
+    })
     setLastVisible(l)
     setHasNext(h)
     setLoading(false)
@@ -128,7 +161,7 @@ export const OrdersContainer = ({
       <ul className={`${className} grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-2`}>
         {
           (
-            orders.map((order) => (
+            orders.filterOrders.map((order) => (
               <OrderCard
                 key={order.id}
                 setReload={setReload}
@@ -138,7 +171,7 @@ export const OrdersContainer = ({
           )
         }
         {
-          loading && orders.length === 0 && (
+          loading && orders.filterOrders.length === 0 && (
             Array(6).fill(0).map((_, index) => (
               <OrderSkeleton key={index} />
             ))
