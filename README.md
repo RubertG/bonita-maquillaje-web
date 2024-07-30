@@ -63,7 +63,7 @@ La página web tiene en su home page su Linkstree con sus redes sociales, ubicac
   [x] Paginacion de los pedidos (que solo aparezcan 20 ultimos pedidos por pagina)
   [] Buscador por nombre del cliente  
 
-- Crear pagina de los pedidos (Editar pedido)
+- Crear pagina de los pedidos (Crear pedido)
   [x] pagina para ver pedido
   [x] Conectar con firebase para traer el pedido
   [x] Tabla de resumen de la compra
@@ -72,4 +72,10 @@ La página web tiene en su home page su Linkstree con sus redes sociales, ubicac
   [x] Conectar con hook del formularios para los errorres
   [x] Pruebas
 
-Corregir que se pueda elegir el color de tono de los productos 
+- Crear pagina de los pedidos (Crear pedido)
+  [] Conectar con firebase para traer el pedido
+  [] Tabla de resumen de la compra
+  [] componente aplicar descuento
+  [] Componentes del formulario 
+  [] Conectar con hook del formularios para los errorres
+  [] Pruebas

@@ -1,6 +1,6 @@
 import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore"
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher"
-import { Product as ProductDB } from "../db/db"
+import { Order, Product as ProductDB, Tone } from "../db/db"
 
 export interface FileStateItem {
   name: string

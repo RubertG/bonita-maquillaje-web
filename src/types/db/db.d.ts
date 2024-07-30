@@ -34,6 +34,7 @@ export interface Order {
   city: string
   address: string
   state: boolean
+  paymentMethod: string
   products: {
     id: Id
     discountCode?: {

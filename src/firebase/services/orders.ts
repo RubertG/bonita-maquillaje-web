@@ -1,7 +1,7 @@
 import { collection, deleteDoc, doc, DocumentData, getDoc, getDocs, limit, orderBy, query, QueryDocumentSnapshot, setDoc, startAfter, updateDoc, where } from "firebase/firestore"
 import { db } from "../initializeApp"
 import { ROUTES_COLLECTIONS } from "@/consts/db/db"
-import { Order } from "@/types/db/db"
+import { Order, Product as ProductDB } from "@/types/db/db"
 import { LIMIT_ORDERS_PER_PAGE } from "@/consts/admin/orders"
 
 export const getFirstOrders = async () => {
@@ -74,7 +74,24 @@ export const getOrder = async (id: string) => {
   const docSnap = await getDoc(docRef)
 
   if (docSnap.exists()) {
-    return docSnap.data() as Order
+    const order = docSnap.data() as Order
+    const productsOrder = await Promise.all(order.products.map(async (product) => {
+      const productRef = doc(db, ROUTES_COLLECTIONS.PRODUCTS, product.id)
+      const productSnap = await getDoc(productRef)
+      const productData = productSnap.data() as ProductDB
+
+      if (!productData) return null
+
+      return {
+        ...productData,
+        ...product
+      }
+    }))
+
+    return {
+      ...order,
+      products: productsOrder.filter(product => product !== null)
+    }
   } else {
     return null
   }

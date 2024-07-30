@@ -20,8 +20,8 @@ export const AddProductCard = ({
 
   useEffect(() => {
     if (count === 0) return
-
   }, [count])
+
 
   return (
     <li className="flex w-full gap-2 items-center justify-between rounded-lg lg:p-2 lg:hover:bg-bg-100 lg:transition-colors">
@@ -91,7 +91,16 @@ export const AddProductCard = ({
         </div>
       </div>
       {
-        count > 0 && (product.tones.length !== 0 && product.tone) && (
+        (count > 0 && product.tones.length === 0) && (
+          <button
+            onClick={() => onClick(product)}
+          >
+            <Plus className="w-5 h-5 stroke-accent-300 lg:hover:scale-125 lg:transition-transform" />
+          </button>
+        )
+      }
+      {
+        (product.tones.length > 0 && product.tone && count > 0) && (
           <button
             onClick={() => onClick(product)}
           >
@@ -154,10 +163,14 @@ export const DeleteProductCard = ({
             >
               ${product.price}
             </p>
-            <span
-              className="inline-block rounded-full w-5 h-5 shadow-button"
-              style={{ backgroundColor: product.tone?.color }}
-            />
+            {
+              product.tone && (
+                <span
+                  className="inline-block rounded-full w-5 h-5 shadow-button"
+                  style={{ backgroundColor: product.tone?.color }}
+                />
+              )
+            }
           </div>
         </div>
       </div>
