@@ -11,5 +11,4 @@ export const removeStorage = () => {
   localStorage.removeItem("orders")
   localStorage.removeItem("lastVisible")
   localStorage.removeItem("hasNext")
-  localStorage.removeItem("reload")
 }

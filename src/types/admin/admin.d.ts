@@ -50,4 +50,5 @@ export interface Product extends ProductDB {
     code: Id
     discount: number
   }
+  tone?: Tone
 }

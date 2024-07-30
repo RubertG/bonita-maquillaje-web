@@ -6,7 +6,7 @@ interface Props {
 }
 
 function roundToDecimals(num: number) {
-  return parseFloat(num.toFixed(2))
+  return parseInt(num.toFixed(0))
 }
 
 export const ProductsSummary = ({

@@ -13,7 +13,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { Timestamp } from "firebase/firestore"
 import { saveOrder } from "@/firebase/services/orders"
 import { useRouter } from "next/navigation"
-import { removeStorage } from "@/utils/orders-strorage"
+import { removeStorage } from "@/utils/orders-storage"
 
 export const CreateOrderForm = () => {
   const [searchedProducts, setSearchedProducts] = useState<{

@@ -9,7 +9,7 @@ import { branch } from "@/fonts/branch/branch"
 import { useRouter, useSearchParams } from "next/navigation"
 import { Order } from "@/types/db/db"
 import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore"
-import { removeStorage, setStorage } from "@/utils/orders-strorage"
+import { removeStorage, setStorage } from "@/utils/orders-storage"
 
 interface Props {
   className?: string

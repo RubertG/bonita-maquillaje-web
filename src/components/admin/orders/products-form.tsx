@@ -8,6 +8,7 @@ import { DeleteProductCard } from "./product-card"
 import clsx from "clsx"
 import { ProductsSummary } from "../../common/products-summary"
 import { SearcherClient } from "@/components/common/searcher"
+import { Tone } from "@/types/db/db"
 
 interface Props {
   products: Product[]
@@ -87,7 +88,7 @@ export const ProductsForm = ({
   const handleSelectProduct = (product: Product) => {
     setProducts([...products, product])
     setSearchedProducts({
-      original: searchedProducts.original.filter((p) => p.id !== product.id),
+      ...searchedProducts,
       filtered: []
     })
   }
@@ -95,7 +96,7 @@ export const ProductsForm = ({
   const handleDeleteProduct = (product: Product) => {
     setProducts(products.filter((p) => p.id !== product.id))
     setSearchedProducts({
-      original: [...searchedProducts.original, product],
+      ...searchedProducts,
       filtered: []
     })
   }
@@ -106,6 +107,22 @@ export const ProductsForm = ({
         return {
           ...p,
           amount: count
+        }
+      }
+      return p
+    })
+    setSearchedProducts({
+      ...searchedProducts,
+      filtered: newProducts
+    })
+  }
+
+  const handleSelectTone = (product: Product, tone: Tone) => {
+    const newProducts = searchedProducts.filtered.map((p) => {
+      if (p.id === product.id) {
+        return {
+          ...p,
+          tone: tone
         }
       }
       return p
@@ -144,6 +161,7 @@ export const ProductsForm = ({
                 "mt-4": products.length === 0,
                 "": products.length !== 0
               })}
+              handleSelectTone={handleSelectTone}
               changeCount={handleChangeCountFilters}
               searchedProducts={searchedProducts.filtered}
               handleSelectProduct={handleSelectProduct} />
@@ -151,7 +169,7 @@ export const ProductsForm = ({
         }
         {
           products.length > 0 && (
-            <ul className="flex flex-col gap-2 md:gap-0 mt-4">
+            <ul className="flex flex-col gap-3 md:gap-0 mt-4">
               {
                 products.map((product) => (
                   <DeleteProductCard

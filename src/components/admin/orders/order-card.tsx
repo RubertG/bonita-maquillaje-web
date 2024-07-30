@@ -25,6 +25,7 @@ export const OrderCard = ({ name, create_at, id, products, setReload }: Props) =
   }
 
   const date = getDate()
+  const productsCount = products.reduce((total, product) => total + product.amount, 0)
 
   return (
     <li
@@ -45,7 +46,7 @@ export const OrderCard = ({ name, create_at, id, products, setReload }: Props) =
             ) : (
               date
             )
-          } - {products.length} productos
+          } - {productsCount} productos
         </p>
       </div>
       <OptionsOrderCard id={id} setReload={setReload} />

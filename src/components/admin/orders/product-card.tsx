@@ -2,16 +2,19 @@
 
 import { Delete, Plus } from "@/components/common/icons"
 import { Product } from "@/types/admin/admin"
+import { Tone } from "@/types/db/db"
+import clsx from "clsx"
 import { useEffect, useState } from "react"
 
 interface Props {
   product: Product
   onClick: (product: Product) => void
   changeCount: (product: Product, count: number) => void
+  handleSelectTone: (product: Product, tone: Tone) => void
 }
 
 export const AddProductCard = ({
-  onClick, product, changeCount
+  onClick, product, changeCount, handleSelectTone
 }: Props) => {
   const [count, setCount] = useState(0)
 
@@ -22,7 +25,7 @@ export const AddProductCard = ({
 
   return (
     <li className="flex w-full gap-2 items-center justify-between rounded-lg lg:p-2 lg:hover:bg-bg-100 lg:transition-colors">
-      <div className="flex gap-2 items-center overflow-hidden">
+      <div className="flex gap-2 items-center lg:overflow-hidden w-full">
         <img
           className="w-16 object-cover rounded-lg aspect-[3/4]"
           loading="lazy"
@@ -34,7 +37,8 @@ export const AddProductCard = ({
           >
             {product.name}
           </h3>
-          <div className="flex gap-3 items-center">
+
+          <div className="flex gap-3 items-center flex-wrap">
             <div className="flex bg-bg-50 rounded-lg shadow-button items-center justify-center">
               <button
                 onClick={() => {
@@ -64,11 +68,30 @@ export const AddProductCard = ({
             >
               ${product.price}
             </p>
+
+            <div className="flex items-center gap-1.5">
+              {
+                product.tones && product.tones.map((tone, index) => {
+                  const isSelected = product.tone?.name === tone.name
+
+                  return (
+                    <span
+                      key={index}
+                      className={clsx("inline-block rounded-full w-5 h-5 cursor-pointer shadow-button lg:hover:scale-125 transition-transform", {
+                        "scale-125": isSelected
+                      })}
+                      style={{ backgroundColor: tone.color }}
+                      onClick={() => handleSelectTone(product, tone)}
+                    />
+                  )
+                })
+              }
+            </div>
           </div>
         </div>
       </div>
       {
-        count > 0 && (
+        count > 0 && (product.tones.length !== 0 && product.tone) && (
           <button
             onClick={() => onClick(product)}
           >
@@ -82,13 +105,13 @@ export const AddProductCard = ({
 
 export const DeleteProductCard = ({
   onClick, product, changeCount
-}: Props) => {
+}: Omit<Props, "handleSelectTone">) => {
   const [count, setCount] = useState(product.amount)
 
   return (
     <li
       className="flex w-full gap-2 items-center justify-between rounded-lg lg:p-2 lg:hover:bg-bg-100 lg:transition-colors">
-      <div className="flex gap-2 items-center overflow-hidden">
+      <div className="flex gap-2 items-center lg:overflow-hidden w-full">
         <img
           className="w-16 object-cover rounded-lg aspect-[3/4]"
           loading="lazy"
@@ -100,11 +123,12 @@ export const DeleteProductCard = ({
           >
             {product.name}
           </h3>
-          <div className="flex gap-3 items-center">
-            <div className="flex bg-bg-50 rounded-lg shadow-button items-center justify-center overflow-hidden">
+
+          <div className="flex gap-3 items-center flex-wrap">
+            <div className="flex bg-bg-50 rounded-lg shadow-button items-center justify-center">
               <button
                 onClick={() => {
-                  if (count === 1) return
+                  if (count === 0) return
                   setCount(count - 1)
                   changeCount(product, count - 1)
                 }}
@@ -130,6 +154,10 @@ export const DeleteProductCard = ({
             >
               ${product.price}
             </p>
+            <span
+              className="inline-block rounded-full w-5 h-5 shadow-button"
+              style={{ backgroundColor: product.tone?.color }}
+            />
           </div>
         </div>
       </div>

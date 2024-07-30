@@ -40,6 +40,7 @@ export interface Order {
       code: Id
       discount: number
     }
+    tone?: Tone
     amount: number
   }[]
   create_at: Timestamp
