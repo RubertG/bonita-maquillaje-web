@@ -58,6 +58,12 @@ export const EditOrderForm = ({
         }
         await updateOrder(order)
         removeStorage()
+        
+        if (isOrder) {
+          removeStorage(true /* state */)
+          router.push("/admin/ventas")
+        }
+        
         router.push("/admin/pedidos")
       } catch (err) {
         setErrorSubmit("Error al guardar el pedido")
