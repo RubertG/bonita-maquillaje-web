@@ -17,9 +17,8 @@ La página web tiene en su home page su Linkstree con sus redes sociales, ubicac
   [x] Poblar base de datos con datos de prueba
   [x] Metodos para traer datos de firebase y mostrarlos en la pagina
   [x] Metodos para crear, actualizar y borrar datos de firebase en cada coleccion necesaria
-
-[x] Crear la navegacion para el administrador
-[x] Conectar con firebase para la autenticacion (login, cerrar sesion, contexto, hooks)
+  [x] Crear la navegacion para el administrador
+  [x] Conectar con firebase para la autenticacion (login, cerrar sesion, contexto, hooks)
 
 - Crear cada vista para el administrador segun el figma
   [x] Actualizar reglas de firebase para que solo pueda agregar a la bd el usuario administrador
@@ -73,9 +72,11 @@ La página web tiene en su home page su Linkstree con sus redes sociales, ubicac
   [x] Pruebas
 
 - Crear pagina de los pedidos (Crear pedido)
-  [] Conectar con firebase para traer el pedido
-  [] Tabla de resumen de la compra
-  [] componente aplicar descuento
-  [] Componentes del formulario 
-  [] Conectar con hook del formularios para los errorres
-  [] Pruebas
+  [x] Conectar con firebase para traer el pedido
+  [x] Tabla de resumen de la compra
+  [x] componente aplicar descuento
+  [x] Componentes del formulario 
+  [x] Conectar con hook del formularios para los errorres
+  [x] Pruebas
+
+Seccion de ventas
