@@ -34,19 +34,12 @@ export const useProducts = () => {
   const fetchProducts = async (search?: string, category?: string) => {
     setLoading(true)
     let p: Product[] = []
-    
+
     if (!category) {
-      let c
-      
-      const pAux = Object.values(products)
-      if (pAux.length === 0) {
-        const [first] = await getCategories()
-        c = first.id
-        p = await getProducts({ category: c })
-      } else {
-        c = pAux[0][0].category
-        p = pAux[0]
-      }
+
+      const [first] = await getCategories()
+      const c = first.id
+      p = await getProducts({ category: c })
 
       setProducts({
         ...products,
