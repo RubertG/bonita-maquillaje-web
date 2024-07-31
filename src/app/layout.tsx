@@ -33,9 +33,11 @@ export default function RootLayout({
         <link rel="icon" href="/logo.webp" type="image/webp" />
       </head>
       <body className='antialiased bg-bg-100'>
-        <SkeletonTheme baseColor="#fcdee9" highlightColor="#fff4f4">
-          {children}
-        </SkeletonTheme>
+        <main>
+          <SkeletonTheme baseColor="#fcdee9" highlightColor="#fff4f4">
+            {children}
+          </SkeletonTheme>
+        </main>
       </body>
     </html >
   )
