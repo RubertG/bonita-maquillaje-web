@@ -37,7 +37,7 @@ export function SocialButtonContainer({
         <p className="w-full">Ubicación</p>
       </SocialButton>
       <SocialButton
-        href="https://drive.google.com/file/d/1WyERw4lUwIBXIxBkqq8jUSa7zdn09b-k/view"
+        href="https://drive.google.com/file/d/1L2YiTc-JY6m_lpi0Jv2otbOyilPppu4F/view"
       >
         <Store className="absolute top-1/2 -translate-y-1/2 left-0 ml-3.5" />
         <p className="w-full">Catálogo</p>
