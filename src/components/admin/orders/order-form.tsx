@@ -16,6 +16,7 @@ interface Props {
   errors: FieldErrors<InputsOrders>
   loading: boolean
   className?: string
+  textButton?: string
 }
 
 export const OrderForm = ({
@@ -27,7 +28,8 @@ export const OrderForm = ({
   register,
   errors,
   loading,
-  className
+  className,
+  textButton = "Guardar pedido"
 }: Props) => {
   return (
     <form
@@ -148,7 +150,7 @@ export const OrderForm = ({
       >
         <Save className="absolute top-1/2 -translate-y-1/2 left-0 ml-3.5 stroke-text-100" />
         <Spinner className={clsx("w-5 h-5 absolute opacity-0 transition-opacity", { "opacity-100": loading })} />
-        <p className={clsx("transition-opacity", { "opacity-0": loading })}>Guardar pedido</p>
+        <p className={clsx("transition-opacity", { "opacity-0": loading })}>{textButton}</p>
       </Button>
     </form>
   )

@@ -79,4 +79,26 @@ La página web tiene en su home page su Linkstree con sus redes sociales, ubicac
   [x] Conectar con hook del formularios para los errorres
   [x] Pruebas
 
-Seccion de ventas
+- Crear pagina de los ventas (Ver ventas)
+  [] pagina para ver ventas
+  [] Conectar con firebase para traer los ventas
+  [] Conectar componentes para mostrar los ventas (Con sus funcionalidades de borrar y link a pagina editar)
+  [] Paginacion de los ventas (que solo aparezcan 20 ultimos ventas por pagina)
+  [] Buscador por nombre del cliente  
+
+- Crear pagina de los ventas (Crear venta)
+  [] pagina para ver venta
+  [] Conectar con firebase para traer el venta
+  [] Tabla de resumen de la compra
+  [] componente aplicar descuento
+  [] Componentes del formulario 
+  [] Conectar con hook del formularios para los errorres
+  [] Pruebas
+
+- Crear pagina de los ventas (Crear venta)
+  [] Conectar con firebase para traer el venta
+  [] Tabla de resumen de la compra
+  [] componente aplicar descuento
+  [] Componentes del formulario 
+  [] Conectar con hook del formularios para los errorres
+  [] Pruebas

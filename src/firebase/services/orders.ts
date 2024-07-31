@@ -4,11 +4,11 @@ import { ROUTES_COLLECTIONS } from "@/consts/db/db"
 import { Order, Product as ProductDB } from "@/types/db/db"
 import { LIMIT_ORDERS_PER_PAGE } from "@/consts/admin/orders"
 
-export const getFirstOrders = async () => {
+export const getFirstOrders = async (state: boolean) => {
   const q = query(collection(
     db, ROUTES_COLLECTIONS.ORDERS),
     orderBy("create_at", "desc"),
-    where("state", "==", false),
+    where("state", "==", state),
     limit(LIMIT_ORDERS_PER_PAGE)
   )
   const querySnapshot = await getDocs(q)
@@ -24,34 +24,11 @@ export const getFirstOrders = async () => {
   }
 }
 
-export const getOrdersSearch = async (search: string) => {
-  const q = query(collection(
-    db, ROUTES_COLLECTIONS.ORDERS),
-    orderBy("create_at", "desc"),
-    where("state", "==", false),
-    limit(LIMIT_ORDERS_PER_PAGE)
-  )
-  const querySnapshot = await getDocs(q)
-  const orders: Order[] = []
-
-  querySnapshot.forEach(doc => {
-    const orderName = doc.data().name as string
-
-    if (orderName.toLocaleLowerCase().includes(search.toLocaleLowerCase())) {
-      orders.push(doc.data() as Order)
-    }
-  })
-
-  return {
-    orders
-  }
-}
-
-export const getNextOrders = async (lastVisible: QueryDocumentSnapshot<DocumentData, DocumentData>) => {
+export const getNextOrders = async (lastVisible: QueryDocumentSnapshot<DocumentData, DocumentData>, state: boolean) => {
   const q = query(collection(
     db, ROUTES_COLLECTIONS.ORDERS),
     orderBy('create_at', 'desc'),
-    where("state", "==", false),
+    where("state", "==", state),
     limit(LIMIT_ORDERS_PER_PAGE),
     startAfter(lastVisible)
   )

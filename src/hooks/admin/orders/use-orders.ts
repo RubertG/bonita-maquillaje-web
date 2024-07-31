@@ -8,12 +8,12 @@ import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 
-export const useOrders = () => {
+export const useOrders = (state: boolean = false) => {
   const [orders, setOrders] = useState<{
     orders: Order[]
     filterOrders: Order[]
   } | undefined>(() => {
-    const orders = localStorage.getItem("orders")
+    const orders = localStorage.getItem(state ? "sales" : "orders")
     if (!orders) return {
       orders: [],
       filterOrders: []
@@ -24,12 +24,12 @@ export const useOrders = () => {
     }
   })
   const [lastVisible, setLastVisible] = useState<QueryDocumentSnapshot<DocumentData, DocumentData> | undefined>(() => {
-    const lastVisible = localStorage.getItem("lastVisible")
+    const lastVisible = localStorage.getItem(state ? "salesLastVisible" : "ordersLastVisible")
     if (!lastVisible) return undefined
     return JSON.parse(lastVisible)
   })
   const [hasNext, setHasNext] = useState(() => {
-    const hasNext = localStorage.getItem("hasNext")
+    const hasNext = localStorage.getItem(state ? "salesHasNext" : "ordersHasNext")
     if (!hasNext) return false
     return JSON.parse(hasNext)
   })
@@ -47,10 +47,10 @@ export const useOrders = () => {
   }, [reload])
 
   useEffect(() => {
-    window.addEventListener('beforeunload', removeStorage)
+    window.addEventListener('beforeunload', () => removeStorage(state))
 
     return () => {
-      window.removeEventListener('beforeunload', removeStorage)
+      window.removeEventListener('beforeunload', () => removeStorage(state))
     }
   }, [])
 
@@ -84,7 +84,7 @@ export const useOrders = () => {
         filterOrders: newOrders
       })
 
-      removeStorage()
+      removeStorage(state)
       setLoading(false)
     }
 
@@ -93,7 +93,7 @@ export const useOrders = () => {
 
   const getOrders = async () => {
     setLoading(true)
-    const { orders: o, lastVisible: l } = await getFirstOrders()
+    const { orders: o, lastVisible: l } = await getFirstOrders(state)
 
     if (!o) {
       setOrders(undefined)
@@ -113,7 +113,7 @@ export const useOrders = () => {
     }
 
     const h = o.length === LIMIT_ORDERS_PER_PAGE
-    setStorage(o, l, h)
+    setStorage(o, l, h, state)
     setLastVisible(l)
     setHasNext(h)
     setLoading(false)
@@ -124,9 +124,9 @@ export const useOrders = () => {
   const getMoreOrders = async () => {
     if (!lastVisible || !orders) return
 
-    router.replace("/admin/pedidos")
+    router.replace(`/admin/${state ? "ventas" : "pedidos"}`)
     setLoading(true)
-    const { orders: o, lastVisible: l } = await getNextOrders(lastVisible)
+    const { orders: o, lastVisible: l } = await getNextOrders(lastVisible, state)
 
     if (!orders) {
       setOrders(undefined)
