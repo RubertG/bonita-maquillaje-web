@@ -1,11 +1,9 @@
-import { CategoriesContainer } from "@/components/admin/categories/categories-container"
-import { CategoriesSkeletonContainer } from "@/components/admin/categories/categories-skeleton-container"
+import { CategoriesContainer } from "@/components/admin/products/categories-container"
 import { ProductsContainer } from "@/components/admin/products/products-container"
 import { ButtonWithIcon } from "@/components/common/button-with-icon"
 import { H1 } from "@/components/common/h1"
 import { Store } from "@/components/common/icons"
 import { Searcher } from "@/components/common/searcher"
-import { Suspense } from "react"
 
 async function ProductsPage() {
 
@@ -23,9 +21,7 @@ async function ProductsPage() {
           Añadir producto
         </ButtonWithIcon>
       </section>
-      <Suspense fallback={<CategoriesSkeletonContainer className="mt-6 lg:mt-4" />}>
-        <CategoriesContainer className="mt-6 lg:mt-4" />
-      </Suspense>
+      <CategoriesContainer className="mt-6 lg:mt-4" />
       <ProductsContainer className="mt-6" />
     </main>
   )
