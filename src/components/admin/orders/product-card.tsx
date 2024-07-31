@@ -25,13 +25,13 @@ export const AddProductCard = ({
 
   return (
     <li className="flex w-full gap-2 items-center justify-between rounded-lg lg:p-2 lg:hover:bg-bg-100 lg:transition-colors">
-      <div className="flex gap-2 items-center lg:overflow-hidden w-full">
+      <div className="flex gap-2 items-center overflow-hidden w-full">
         <img
           className="w-16 object-cover rounded-lg aspect-[3/4]"
           loading="lazy"
           src={product.imgs[0].url} alt={`${product.name} - Bonita Maquillaje`}
           title={`${product.name} - Bonita Maquillaje`} />
-        <div className="flex flex-col items-start justify-start gap-1">
+        <div className="flex flex-col items-start justify-start gap-1 overflow-hidden py-1.5 lg:py-0">
           <h3 className="lg:text-lg text-text-100 text-ellipsis overflow-hidden whitespace-nowrap"
             title={product.name}
           >
@@ -69,7 +69,7 @@ export const AddProductCard = ({
               ${product.price}
             </p>
 
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1.5 pl-1 lg:pl-0">
               {
                 product.tones && product.tones.map((tone, index) => {
                   const isSelected = product.tone?.name === tone.name
@@ -120,13 +120,13 @@ export const DeleteProductCard = ({
   return (
     <li
       className="flex w-full gap-2 items-center justify-between rounded-lg lg:p-2 lg:hover:bg-bg-100 lg:transition-colors">
-      <div className="flex gap-2 items-center lg:overflow-hidden w-full">
+      <div className="flex gap-2 items-center overflow-hidden w-full">
         <img
           className="w-16 object-cover rounded-lg aspect-[3/4]"
           loading="lazy"
           src={product.imgs[0].url} alt={`${product.name} - Bonita Maquillaje`}
           title={`${product.name} - Bonita Maquillaje`} />
-        <div className="flex flex-col items-start justify-start gap-1">
+        <div className="flex flex-col items-start justify-start gap-1 overflow-hidden py-1.5 lg:py-0">
           <h3 className="lg:text-lg text-text-100 text-ellipsis overflow-hidden whitespace-nowrap"
             title={product.name}
           >
@@ -137,7 +137,7 @@ export const DeleteProductCard = ({
             <div className="flex bg-bg-50 rounded-lg shadow-button items-center justify-center">
               <button
                 onClick={() => {
-                  if (count === 0) return
+                  if (count === 1) return
                   setCount(count - 1)
                   changeCount(product, count - 1)
                 }}

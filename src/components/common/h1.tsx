@@ -9,7 +9,7 @@ export function H1({
   children: React.ReactNode
 }) {
   return (
-    <h1 className={`${className} ${branch.className} text-text-50 text-[2.5rem] md:text-5xl lg:text-6xl text-center`}>
+    <h1 className={`${className} ${branch.className} text-text-50 text-[2.5rem] md:text-5xl lg:text-6xl text-center leading-[3rem] lg:leading-none`}>
       {children}
     </h1>
   )

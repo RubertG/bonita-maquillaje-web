@@ -52,5 +52,5 @@ export interface DiscountCode {
   code: string
   discount: number
   expiration: Timestamp
-  category?: Id
+  category: Id
 } 

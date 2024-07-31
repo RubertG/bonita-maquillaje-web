@@ -29,7 +29,7 @@ export const SaleCard = ({ name, create_at, id, products, setReload }: Props) =>
 
   return (
     <li
-      className="flex w-full gap-2 items-start rounded-lg justify-between lg:p-2 lg:hover:bg-bg-200 lg:transition-colors"
+      className="flex w-full gap-2 items-start rounded-lg justify-between lg:p-2 lg:hover:bg-bg-200 lg:transition-colors overflow-hidden"
     >
       <div className="overflow-hidden flex flex-col justify-center h-full">
         <h3 className="text-text-100 text-ellipsis overflow-hidden whitespace-nowrap"

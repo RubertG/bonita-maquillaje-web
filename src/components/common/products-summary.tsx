@@ -35,7 +35,7 @@ export const ProductsSummary = ({
             return (
               <li
                 key={product.id}
-                className="flex items-center justify-between"
+                className="flex items-center justify-between gap-1.5"
               >
                 <p className="text-text-100 font-light overflow-hidden text-ellipsis whitespace-nowrap">{product.name}</p>
                 <p className="text-accent-300 text-lg flex items-center gap-2">

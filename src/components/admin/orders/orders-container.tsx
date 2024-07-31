@@ -38,7 +38,7 @@ export const OrdersContainer = ({
           )
         }
         {
-          loading && orders.filterOrders.length === 0 && (
+          loading && (
             Array(6).fill(0).map((_, index) => (
               <OrderSkeleton key={index} />
             ))

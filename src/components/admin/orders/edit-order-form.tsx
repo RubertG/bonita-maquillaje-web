@@ -110,7 +110,7 @@ export const EditOrderForm = ({
             type="checkbox"
             id="state" />
           <div
-            className="w-5 h-5 border border-principal-100 rounded-full cursor-pointer p-0.5">
+            className="w-5 h-5 border border-principal-100 rounded-full cursor-pointer p-1">
             <div className={clsx("w-full h-full rounded-full transition-opacity bg-principal-100", {
               "opacity-100": isOrder, 
               "opacity-0": !isOrder
