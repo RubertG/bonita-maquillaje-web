@@ -34,7 +34,7 @@ export default function RootLayout({
       </head>
       <body className='antialiased bg-bg-100'>
         <main>
-          <SkeletonTheme baseColor="#fcdee9" highlightColor="#fff4f4">
+          <SkeletonTheme baseColor="#feeaf0" highlightColor="#fff4f4">
             {children}
           </SkeletonTheme>
         </main>
