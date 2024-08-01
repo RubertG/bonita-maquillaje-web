@@ -2,15 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
-.scrollbar-hide::-webkit-scrollbar {
+.scrollbar-hide::-webkit-scrollbar, 
+.scrollbar-hide-sm::-webkit-scrollbar {
   display: none;
 }
 
-.scrollbar-hide {
+.scrollbar-hide, .scrollbar-hide-sm {
   -ms-overflow-style: none;
   /* IE and Edge */
   scrollbar-width: none;
   /* Firefox */
+}
+
+@media screen and (min-width: 768px) {
+  .scrollbar-hide-sm {
+    -ms-overflow-style: block;
+    /* IE and Edge */
+    scrollbar-width: auto;
+    /* Firefox */
+  }
+
+  .scrollbar-hide-sm::-webkit-scrollbar {
+    display: block;
+  }
 }
 
 .entry {
