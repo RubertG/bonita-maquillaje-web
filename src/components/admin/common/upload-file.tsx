@@ -36,14 +36,14 @@ export const UploadFile = ({
   ...props
 }: Props) => {
   const { handleChange, totalSize, handleDeleteOld, handleDelete, error } = useUploadFile({
-      items,
-      limitSize,
-      setItems,
-      imgsOld,
-      setImgsOld,
-      multiple,
-      refCollection
-    })
+    items,
+    limitSize,
+    setItems,
+    imgsOld,
+    setImgsOld,
+    multiple,
+    refCollection
+  })
 
   return (
     <section className={`${className}`}>

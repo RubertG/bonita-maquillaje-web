@@ -31,14 +31,14 @@ export const AddProductCard = ({
           loading="lazy"
           src={product.imgs[0].url} alt={`${product.name} - Bonita Maquillaje`}
           title={`${product.name} - Bonita Maquillaje`} />
-        <div className="flex flex-col items-start justify-start gap-1 overflow-hidden py-1.5 lg:py-0">
+        <div className="flex flex-col items-start justify-start gap-1 overflow-hidden py-2">
           <h3 className="lg:text-lg text-text-100 text-ellipsis overflow-hidden whitespace-nowrap"
             title={product.name}
           >
             {product.name}
           </h3>
 
-          <div className="flex gap-3 items-center flex-wrap">
+          <div className="flex gap-2.5 items-center flex-wrap">
             <div className="flex bg-bg-50 rounded-lg shadow-button items-center justify-center">
               <button
                 onClick={() => {
@@ -69,7 +69,7 @@ export const AddProductCard = ({
               ${product.price}
             </p>
 
-            <div className="flex items-center gap-1.5 pl-1 lg:pl-0">
+            <div className="flex items-center gap-1.5 px-1">
               {
                 product.tones && product.tones.map((tone, index) => {
                   const isSelected = product.tone?.name === tone.name

@@ -1,9 +1,10 @@
 "use client"
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { Search } from "./icons"
+import { Search, X } from "./icons"
 import { useEffect, useRef, useState } from "react"
 import { useDebouncedCallback } from "use-debounce"
+import clsx from "clsx"
 
 export const Searcher = ({
   className, placeholder
@@ -22,7 +23,7 @@ export const Searcher = ({
       inputRef.current.value = ""
     }
   }, [searchParams.get("busqueda")])
-  
+
   const handleSearch = () => {
     const categoriaValue = searchParams.get("categoria")
 
@@ -94,7 +95,20 @@ export const SearcherClient = ({
         onChange={(e) => handleChange(e.target.value)}
         ref={inputRef}
         type="text" />
-      <Search className="stroke-text-200 w-8" />
+      <button
+        className="flex items-center justify-center relative"
+        disabled={search === ""}
+        onClick={() => handleSearch("")}
+      >
+        <Search className={clsx("stroke-text-200 w-8 transition-opacity", {
+          "opacity-0": search !== "",
+          "opacity-100": search === ""
+        })} />
+        <X className={clsx("stroke-text-200 w-8 absolute transition-opacity", {
+          "opacity-0": search === "",
+          "opacity-100": search !== ""
+        })} />
+      </button>
     </form>
   )
 }
