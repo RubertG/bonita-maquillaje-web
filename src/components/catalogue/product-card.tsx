@@ -5,7 +5,7 @@ export const ProductCard = ({ name, price, imgs, id }: Product) => {
   return (
     <Link
       href={`/catalogo/${id}`}
-      className="lg:p-2.5 rounded-lg lg:hover:bg-bg-200 cursor-pointer lg:transition-colors entry">
+      className="lg:p-2.5 rounded-lg lg:hover:bg-bg-200 cursor-pointer lg:transition-colors">
       <img
         className="w-full aspect-[3/4] object-cover rounded-lg"
         src={imgs[0].url}

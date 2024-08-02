@@ -2,7 +2,7 @@ import Skeleton from "react-loading-skeleton"
 
 export const ProductSkeleton = () => {
   return (
-    <li className="lg:p-2.5 rounded-lg entry">
+    <li className="lg:p-2.5 rounded-lg">
       <Skeleton
         className="w-full aspect-[3/4] object-cover rounded-lg"
       />
