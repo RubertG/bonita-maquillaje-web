@@ -35,7 +35,6 @@ export const ProductsContainer = ({
       {
         ((!products || products.length === 0) && !loading) && (
           <section className={`${className} text-center text-text-300`}>
-            No se encontraron productos :(
             <article className="mt-3 mx-auto">
               {
                 (searchParams.busqueda) && (

@@ -4,7 +4,7 @@ import { SkeletonTheme } from "react-loading-skeleton"
 import 'react-loading-skeleton/dist/skeleton.css'
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://bonita-maquillaje.vercel.app"),
+  metadataBase: new URL("https://bonita-maquillaje.com"),
   title: "Bonita Maquillaje",
   description: "Somos una tienda virtual y física en la ciudad de Cúcuta. Te ofrecemos los productos más TOP de marcas Colombianas en maquillaje, skincare y accesorios.",
   authors: {
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     description: "Somos una tienda virtual y física en la ciudad de Cúcuta. Te ofrecemos los productos más TOP de marcas Colombianas en maquillaje, skincare y accesorios.",
     images: '/logo.webp',
     type: 'website',
-    url: 'https://bonita-maquillaje.vercel.app/',
+    url: 'https://bonita-maquillaje.com/',
     siteName: 'Bonita Maquillaje'
   }
 }

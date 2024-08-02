@@ -1,5 +1,6 @@
 "use client"
 
+import { Counter } from "@/components/common/counter"
 import { Delete, Plus } from "@/components/common/icons"
 import { Product } from "@/types/admin/admin"
 import { Tone } from "@/types/db/db"
@@ -22,6 +23,16 @@ export const AddProductCard = ({
     if (count === 0) return
   }, [count])
 
+  const handleSubstract = () => {
+    if (count === 0) return
+    setCount(count - 1)
+    changeCount(product, count - 1)
+  }
+
+  const handleSum = () => {
+    setCount(count + 1)
+    changeCount(product, count + 1)
+  }
 
   return (
     <li className="flex w-full gap-2 items-center justify-between rounded-lg lg:p-2 lg:hover:bg-bg-100 lg:transition-colors">
@@ -39,29 +50,10 @@ export const AddProductCard = ({
           </h3>
 
           <div className="flex gap-2.5 items-center flex-wrap">
-            <div className="flex bg-bg-50 rounded-lg shadow-button items-center justify-center">
-              <button
-                onClick={() => {
-                  if (count === 0) return
-                  setCount(count - 1)
-                  changeCount(product, count - 1)
-                }}
-                className="py-4 px-3">
-                <span className="w-3.5 h-[2px] bg-text-300 rounded-lg block" />
-              </button>
-              <p className="px-2 text-accent-300 text-lg">
-                {count}
-              </p>
-              <button
-                onClick={() => {
-                  setCount(count + 1)
-                  changeCount(product, count + 1)
-                }}
-                className="py-4 px-3">
-                <span className="w-3.5 h-[2px] bg-text-300 rounded-lg block" />
-                <span className="w-3.5 h-[2px] bg-text-300 rounded-lg block rotate-90 -translate-y-full" />
-              </button>
-            </div>
+            <Counter
+              count={count}
+              handleSubtract={handleSubstract}
+              handleSum={handleSum} />
             <p
               className="text-accent-300"
               title={`$${product.price}`}

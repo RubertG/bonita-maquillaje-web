@@ -5,8 +5,25 @@ import { H1 } from "@/components/common/h1"
 import { Searcher } from "@/components/common/searcher"
 import { Suspense } from "react"
 
-async function CataloguePage() {
+export const metadata = {
+  title: "Nuestro catálogo - Bonita Maquillaje",
+  description: "Catálogo de productos de Bonita Maquillaje. Encuentra los mejores productos de marcas Colombianas en maquillaje, skincare y accesorios.",
+  authors: {
+    name: "Rubert Gonzalez - Desarrollador web",
+    url: "https://rubertweb.dev"
+  },
+  keywords: 'Bonita maquillaje, bonita, maquillaje, web, cucuta, tineda virtual, skincare, accesorios.',
+  openGraph: {
+    title: "Bonita Maquillaje",
+    description: "Catálogo de productos de Bonita Maquillaje. Encuentra los mejores productos de marcas Colombianas en maquillaje, skincare y accesorios.",
+    images: '/logo.webp',
+    type: 'website',
+    url: 'https://bonita-maquillaje.com/',
+    siteName: 'Bonita Maquillaje'
+  }
+}
 
+async function CataloguePage() {
   return (
     <main
       className="px-4 my-16 xl:px-0 lg:mt-20 max-w-6xl mx-auto"

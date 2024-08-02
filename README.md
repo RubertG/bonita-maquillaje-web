@@ -11,7 +11,14 @@ La página web tiene en su home page su Linkstree con sus redes sociales, ubicac
 ## TODO
 
 1. Pagina principal de los productos 
-  - Navegacion 
-  - Buscador
-  - Categorías
-  - Productos por categoria 
+  - Navegacion 👍
+  - Buscador 👍
+  - Categorías 👍
+  - Productos por categoria 👍
+
+2. pagina de cada producto
+  - Imagenes 👍
+  - Descripcion 👍
+  - seleccionar tonalidad 
+  - seleccionar cantidad 
+  - botones para hacer pedido o agregar al carrito 

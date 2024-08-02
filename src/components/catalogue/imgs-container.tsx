@@ -30,7 +30,7 @@ export const ImgsContainer = ({
         <img
           src={imgs[imgActive].url}
           alt={`${imgs[imgActive].name} - Bonita Maquillaje`}
-          className="w-full object-cover rounded-lg aspect-[3/4]"
+          className="w-full object-cover rounded-lg aspect-[3.5/4]"
         />
       </picture>
       <footer className="mt-2.5 flex gap-2 items-center overflow-auto pb-1 scrollbar-hide-sm">
@@ -42,7 +42,7 @@ export const ImgsContainer = ({
                 src={img.url}
                 alt={`${img.name} - Bonita Maquillaje`}
                 onClick={() => handleImgActive(i)}
-                className={clsx("w-24 object-cover rounded-lg aspect-[3/4] cursor-pointer border transition-colors", {
+                className={clsx("w-24 object-cover rounded-lg aspect-[3.5/4] cursor-pointer border transition-colors", {
                   "border-accent-300": imgActive === i,
                   "border-transparent": imgActive !== i
                 })}
@@ -64,7 +64,7 @@ export const ImgsContainer = ({
               <img
                 src={imgs[imgActive].url}
                 alt={`${imgs[imgActive].name} - Bonita Maquillaje`}
-                className="w-full md:w-[90%] max-h-screen object-cover rounded-lg aspect-[3/4] shadow-button"
+                className="w-full md:w-[90%] max-h-screen object-cover rounded-lg shadow-button"
               />
             </div>
           </Popup>

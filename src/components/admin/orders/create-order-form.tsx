@@ -48,7 +48,7 @@ export const CreateOrderForm = () => {
   })
 
   return (
-    <section className="flex flex-col-reverse gap-4 max-w-lg mx-auto lg:grid lg:grid-cols-[50%_50%] lg:gap-6 lg:max-w-none">
+    <section className="flex flex-col-reverse gap-4 max-w-lg mx-auto lg:grid lg:grid-cols-2 lg:gap-6 lg:max-w-none">
       <article className="mt-3 lg:mt-0">
         <OrderForm
           errors={errors}
