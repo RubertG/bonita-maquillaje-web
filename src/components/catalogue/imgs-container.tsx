@@ -31,6 +31,7 @@ export const ImgsContainer = ({
           src={imgs[imgActive].url}
           alt={`${imgs[imgActive].name} - Bonita Maquillaje`}
           className="w-full object-cover rounded-lg aspect-[3.5/4]"
+          loading="lazy"
         />
       </picture>
       <footer className="mt-2.5 flex gap-2 items-center overflow-auto pb-1 scrollbar-hide-sm">
@@ -41,6 +42,7 @@ export const ImgsContainer = ({
                 key={img.name}
                 src={img.url}
                 alt={`${img.name} - Bonita Maquillaje`}
+                loading="lazy"
                 onClick={() => handleImgActive(i)}
                 className={clsx("w-24 object-cover rounded-lg aspect-[3.5/4] cursor-pointer border transition-colors", {
                   "border-accent-300": imgActive === i,
@@ -62,6 +64,7 @@ export const ImgsContainer = ({
             </button>
             <div className="flex items-center justify-center px-4">
               <img
+                loading="lazy"
                 src={imgs[imgActive].url}
                 alt={`${imgs[imgActive].name} - Bonita Maquillaje`}
                 className="w-full md:w-[90%] max-h-screen object-cover rounded-lg shadow-button"

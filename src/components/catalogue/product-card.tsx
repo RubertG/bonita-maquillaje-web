@@ -16,7 +16,7 @@ export const ProductCard = ({ name, price, imgs, id }: Product) => {
         <h2 className="text-text-100 overflow-hidden text-ellipsis whitespace-nowrap">
           {name}
         </h2>
-        <p className="text-accent-300 text-sm">
+        <p className="text-accent-300 text-sm lg:text-base lg:-mt-0.5">
           ${price}
         </p>
       </footer>

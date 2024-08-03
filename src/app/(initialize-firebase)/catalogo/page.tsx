@@ -18,7 +18,7 @@ export const metadata = {
     description: "Catálogo de productos de Bonita Maquillaje. Encuentra los mejores productos de marcas Colombianas en maquillaje, skincare y accesorios.",
     images: '/logo.webp',
     type: 'website',
-    url: 'https://bonita-maquillaje.com/',
+    url: 'https://bonita-maquillaje.com/catalogo',
     siteName: 'Bonita Maquillaje'
   }
 }
