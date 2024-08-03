@@ -3,7 +3,6 @@
 import { Order } from "@/types/db/db"
 import { v4 as uuidv4 } from 'uuid'
 import { Timestamp } from "firebase/firestore"
-import { saveOrder } from "@/firebase/services/orders"
 import { useRouter } from "next/navigation"
 import { removeStorage } from "@/utils/orders-storage"
 import { useOrderForm } from "@/hooks/admin/orders/use-order-form"
@@ -72,7 +71,6 @@ export const OrderFormCart = ({
           `
         }
 
-        await saveOrder(order)
         removeStorage()
         const message = `¡Hola Bonita Maquillaje! 👋
           %0AEste es el resumen de mi pedido:
