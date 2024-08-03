@@ -69,6 +69,7 @@ export const AddProductCard = ({
                   return (
                     <span
                       key={index}
+                      title={tone.name}
                       className={clsx("inline-block rounded-full w-5 h-5 cursor-pointer shadow-button lg:hover:scale-125 transition-transform", {
                         "scale-125": isSelected
                       })}
@@ -111,14 +112,14 @@ export const DeleteProductCard = ({
 
   return (
     <li
-      className="flex w-full gap-2 items-center justify-between rounded-lg lg:p-2 lg:hover:bg-bg-100 lg:transition-colors">
+      className="flex w-full gap-2 items-center justify-between rounded-lg lg:hover:bg-bg-100 lg:transition-colors">
       <div className="flex gap-2 items-center overflow-hidden w-full">
         <img
           className="w-16 object-cover rounded-lg aspect-[3/4]"
           loading="lazy"
           src={product.imgs[0].url} alt={`${product.name} - Bonita Maquillaje`}
           title={`${product.name} - Bonita Maquillaje`} />
-        <div className="flex flex-col items-start justify-start gap-1 overflow-hidden py-1.5 lg:py-0">
+        <div className="flex flex-col items-start justify-start gap-1 overflow-hidden py-2">
           <h3 className="lg:text-lg text-text-100 text-ellipsis overflow-hidden whitespace-nowrap"
             title={product.name}
           >
@@ -159,6 +160,7 @@ export const DeleteProductCard = ({
               product.tone && (
                 <span
                   className="inline-block rounded-full w-5 h-5 shadow-button"
+                  title={product.tone.name}
                   style={{ backgroundColor: product.tone?.color }}
                 />
               )

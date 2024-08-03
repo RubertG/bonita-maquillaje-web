@@ -1,4 +1,5 @@
 import { getProduct } from "@/firebase/services/products"
+import { Product } from "@/types/admin/admin"
 import { ItemCart } from "@/types/catalogue/cart"
 
 export const setCart = (item: ItemCart) => {
@@ -6,13 +7,13 @@ export const setCart = (item: ItemCart) => {
 
   if (!cartLocal) {
     localStorage.setItem('cart', JSON.stringify([item]))
-    return 
+    return
   }
 
   const parseCart = JSON.parse(cartLocal) as ItemCart[]
 
   if (parseCart.find(it => it.id === item.id)) return
-  
+
   const newCart = [...parseCart, item]
   localStorage.setItem('cart', JSON.stringify(newCart))
 }
@@ -28,11 +29,36 @@ export const getCart = async () => {
 
     if (!product) return null
 
-    return {
+    const tone = product.tones.find(t => t.color === item.color) || product.tones[0]
+
+    const newProduct: Product = { 
       ...product,
-      amount: item.amount
+      amount: item.amount,
+      tone
     }
+
+    return newProduct
   }))
 
   return productsCart.filter(product => product !== null)
+}
+
+export const removeCart = (id: string) => {
+  const cartLocal = localStorage.getItem('cart')
+
+  if (!cartLocal) return
+
+  const parseCart = JSON.parse(cartLocal) as ItemCart[]
+  const newCart = parseCart.filter(it => it.id !== id)
+  localStorage.setItem('cart', JSON.stringify(newCart))
+}
+
+export const changeCount = (id: string, count: number) => {
+  const cartLocal = localStorage.getItem('cart')
+
+  if (!cartLocal) return
+
+  const parseCart = JSON.parse(cartLocal) as ItemCart[]
+  const newCart = parseCart.map(it => it.id === id ? { ...it, amount: count } : it)
+  localStorage.setItem('cart', JSON.stringify(newCart))
 }

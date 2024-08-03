@@ -19,6 +19,20 @@ La página web tiene en su home page su Linkstree con sus redes sociales, ubicac
 2. pagina de cada producto
   - Imagenes 👍
   - Descripcion 👍
-  - seleccionar tonalidad 
-  - seleccionar cantidad 
-  - botones para hacer pedido o agregar al carrito 
+  - seleccionar tonalidad 👍
+  - seleccionar cantidad 👍
+  - botones para hacer pedido o agregar al carrito 👍
+
+3. Carrito de compras 
+  - Ver productos en el carrito 
+  - Eliminar productos del carrito
+  - Cambiar cantidad de productos del carrito 
+  - Formulario para realizar pedido de todos los productos del carrito
+
+4. Compra de un solo elemento del carrito 
+  - mismo layout del carrito con el formulario pero para solo un carrito 
+
+5. Página de mis pedidos 
+  - mostrar info de la compra hecha por el usuario
+  - Mostrar productos del pedido 
+  - Boton para contactar en caso de error en el pedido 
