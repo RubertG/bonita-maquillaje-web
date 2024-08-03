@@ -8,12 +8,12 @@ export const ImgsContainerSkeleton = () => {
           className="w-full object-cover rounded-lg aspect-[3.5/4]"
         />
       </picture>
-      <footer className="mt-2.5 flex gap-2 items-center overflow-auto pb-1 scrollbar-hide-sm h-32">
+      <footer className="mt-2.5 flex gap-2 items-center overflow-hidden h-32">
         {
-          Array(4).fill(0).map((_, i) => (
+          Array(3).fill(0).map((_, i) => (
             <Skeleton
               key={i}
-              className="block h-40 w-24 object-cover rounded-lg aspect-[3.5/4] cursor-pointer border transition-colors"
+              className="block h-32 w-24 object-cover rounded-lg aspect-[3.5/4]"
             />
           ))
         }
