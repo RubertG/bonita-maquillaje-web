@@ -17,9 +17,10 @@ import { Popup } from "../common/popup"
 import { Button } from "../common/button"
 
 export const OrderFormCart = ({
-  className
+  className, id
 }: {
-  className?: string
+  className?: string,
+  id?: string
 }) => {
   const [popup, setPopup] = useState(false)
   const router = useRouter()
@@ -106,6 +107,7 @@ export const OrderFormCart = ({
 
         setPopup(true)
       } catch (err) {
+        console.log(err)
         setErrorSubmit("Error al crear el pedido")
       }
     }
@@ -116,7 +118,12 @@ export const OrderFormCart = ({
 
     const getC = async () => {
       setLoadingProducts(true)
-      const cart = await getCart()
+      let cart = await getCart()
+
+      if (id) {
+        cart = cart.filter(product => product.id === id)
+      }
+
       setProducts(cart)
       setLoadingProducts(false)
     }
@@ -151,6 +158,7 @@ export const OrderFormCart = ({
             </article>
             <aside>
               <ProductsContainer
+                skeletons={id ? 1 : 2}
                 loading={loadingProducts}
                 products={products}
                 setProducts={setProducts}

@@ -10,12 +10,14 @@ interface Props {
   products: Product[]
   setProducts: React.Dispatch<React.SetStateAction<Product[]>>
   loading: boolean
+  skeletons?: number
 }
 
 export const ProductsContainer = ({
   products,
   setProducts,
-  loading
+  loading,
+  skeletons = 2
 }: Props) => {
   const handleChangeCount = (product: Product, count: number) => {
     const newProducts = products.map((p) => {
@@ -48,7 +50,7 @@ export const ProductsContainer = ({
         loading ? (
           <>
             {
-              Array(2).fill(0).map((_, index) => (
+              Array(skeletons).fill(0).map((_, index) => (
                 <li
                   key={index}
                   className="grid grid-cols-[1fr_auto] gap-2 items-center rounded-lg lg:p-2 entry"
