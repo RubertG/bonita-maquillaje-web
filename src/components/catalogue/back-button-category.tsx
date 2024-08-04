@@ -9,6 +9,6 @@ export const BackButtonCategory = async () => {
   )
  
   return (
-    <BackButton href={`/catalogo?${categories[0].id}`} />
+    <BackButton href={`/catalogo?categoria=${categories[0].id}`} />
   )
 } 

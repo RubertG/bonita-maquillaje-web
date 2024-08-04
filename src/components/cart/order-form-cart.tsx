@@ -13,12 +13,15 @@ import { getCart } from "@/utils/cart"
 import { ProductsSummary } from "../common/products-summary"
 import { ButtonWithIcon } from "../common/button-with-icon"
 import { Store } from "../common/icons"
+import { Popup } from "../common/popup"
+import { Button } from "../common/button"
 
 export const OrderFormCart = ({
   className
 }: {
   className?: string
 }) => {
+  const [popup, setPopup] = useState(false)
   const router = useRouter()
   const [loadingProducts, setLoadingProducts] = useState(true)
   const {
@@ -66,7 +69,7 @@ export const OrderFormCart = ({
           productsParser += `%0A      ${i + 1}. ${product.name} x ${product.amount} = $${product.price * product.amount}
           ${product.tone ? `%0A         Tono: ${product.tone.name}` : ""}
           %0A         Precio: $${product.price}
-          ${product.discountCode ? `%0A         Descuento: ${product.discountCode.code} - ${product.discountCode.discount}%` : ""}
+          ${product.discountCode ? `%0A         Descuento: ${product.discountCode.code} - ${product.discountCode.discount}%25` : ""}
           ${discount > 0 ? `%0A         Total: $${discount}` : ""}
           `
         }
@@ -76,10 +79,10 @@ export const OrderFormCart = ({
           %0AEste es el resumen de mi pedido:
           %0A   
           %0A   Fecha: ${order.create_at.toDate().toLocaleDateString('es-ES', {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric'
-          })}
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric'
+        })}
           %0A   Nombre del cliente: ${order.name}
           %0A   Telefono: ${order.phone}
           %0A   Email: ${order.email}
@@ -101,7 +104,7 @@ export const OrderFormCart = ({
           window.open(url, '_blank')
         }
 
-        router.push("/catalogo")
+        setPopup(true)
       } catch (err) {
         setErrorSubmit("Error al crear el pedido")
       }
@@ -155,6 +158,23 @@ export const OrderFormCart = ({
               {errorProducts && <p className="text-red-500 font-light px-3.5 mt-4 text-sm">{errorProducts}</p>}
               <ProductsSummary products={products} className="mt-5" />
             </aside>
+            {
+              popup && (
+                <Popup>
+                  <div className="flex flex-col items-center justify-center gap-4 p-4 bg-bg-50 shadow-button rounded-lg">
+                    <p className="text-text-100 text-lg">¡Gracias por tu pedido!</p>
+                    <Button
+                      onClick={() => {
+                        setPopup(false)
+                        router.push("/catalogo")
+                      }}
+                    >
+                      Seguir comprando
+                    </Button>
+                  </div>
+                </Popup>
+              )
+            }
           </section>
         )
       }

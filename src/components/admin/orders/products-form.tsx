@@ -61,7 +61,7 @@ export const ProductsForm = ({
         }
         {
           products.length > 0 && (
-            <ul className="flex flex-col gap-3 md:gap-0 mt-4">
+            <ul className="flex flex-col gap-3 mt-4">
               {
                 products.map((product) => (
                   <DeleteProductCard

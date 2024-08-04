@@ -12,7 +12,11 @@ export const setCart = (item: ItemCart) => {
 
   const parseCart = JSON.parse(cartLocal) as ItemCart[]
 
-  if (parseCart.find(it => it.id === item.id)) return
+  if (parseCart.find(it => {
+    if (it.color) return it.color === item.color && it.id === item.id
+
+    return it.id === item.id
+  })) return
 
   const newCart = [...parseCart, item]
   localStorage.setItem('cart', JSON.stringify(newCart))
@@ -43,13 +47,19 @@ export const getCart = async () => {
   return productsCart.filter(product => product !== null)
 }
 
-export const removeCart = (id: string) => {
+export const removeCart = (product: Product) => {
   const cartLocal = localStorage.getItem('cart')
 
   if (!cartLocal) return
 
   const parseCart = JSON.parse(cartLocal) as ItemCart[]
-  const newCart = parseCart.filter(it => it.id !== id)
+  const newCart = parseCart.filter(it => {
+    if (product.id === product.id && product.tone?.color && it?.color) {
+      return it?.color  !== product.tone?.color
+    }
+
+    return it.id === product.id
+  })
   localStorage.setItem('cart', JSON.stringify(newCart))
 }
 

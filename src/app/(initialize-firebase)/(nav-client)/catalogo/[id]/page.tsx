@@ -1,3 +1,4 @@
+import { BackButtonCategory } from "@/components/catalogue/back-button-category"
 import { ButtonShare } from "@/components/catalogue/button-share"
 import { ButtonsProducts } from "@/components/catalogue/buttons-products"
 import { CounterProduct } from "@/components/catalogue/counter-product"
@@ -7,6 +8,7 @@ import { BackButton } from "@/components/common/back-button"
 import { getProduct } from "@/firebase/services/products"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
+import { Suspense } from "react"
 
 interface Props {
   params: {
@@ -39,7 +41,11 @@ export default async function ProductPage({
       className="px-4 my-16 xl:px-0 lg:mt-20 max-w-5xl mx-auto"
     >
       <section className="flex items-center gap-3 justify-between">
-        <BackButton href={`/catalogo?categoria=${product.category}`} />
+        <Suspense fallback={(
+          <BackButton href="/catalogo" />
+        )}>
+          <BackButtonCategory />
+        </Suspense>
         <p className="text-accent-300 text-xl">${product.price}</p>
       </section>
 
@@ -85,7 +91,7 @@ export default async function ProductPage({
             searchParams={searchParams}
           />
 
-          <ButtonsProducts 
+          <ButtonsProducts
             className="mt-7"
             searchParams={searchParams}
             id={product.id}

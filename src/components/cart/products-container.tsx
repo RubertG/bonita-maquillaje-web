@@ -32,8 +32,14 @@ export const ProductsContainer = ({
   }
 
   const handleDeleteProduct = (product: Product) => {
-    setProducts(products.filter((p) => p.id !== product.id))
-    removeCart(product.id)
+    setProducts(products.filter((p) => {
+      if (product.id === product.id && product.tone && p.tone) {
+        return p.tone !== product.tone
+      }
+
+      return p.id !== product.id
+    }))
+    removeCart(product)
   }
 
   return (
@@ -69,7 +75,7 @@ export const ProductsContainer = ({
         ) : (
           products.map((product) => (
             <DeleteProductCard
-              key={product.id}
+              key={product.id + product.tone?.name}
               changeCount={handleChangeCount}
               onClick={handleDeleteProduct}
               product={product}

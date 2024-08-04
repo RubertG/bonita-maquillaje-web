@@ -85,7 +85,13 @@ export const useProductsForm = ({
   }
 
   const handleDeleteProduct = (product: Product) => {
-    setProducts(products.filter((p) => p.id !== product.id))
+    setProducts(products.filter((p) => {
+      if (product.id === product.id && product.tone && p.tone) {
+        return p.tone !== product.tone
+      }
+
+      return p.id !== product.id
+    }))
     setSearchedProducts({
       ...searchedProducts,
       filtered: []

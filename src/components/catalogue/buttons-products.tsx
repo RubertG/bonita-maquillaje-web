@@ -42,9 +42,13 @@ export const ButtonsProducts = ({
       if (!cartLocal) return
 
       const cart = JSON.parse(cartLocal) as ItemCart[]
-      setInCart(cart.some((item) => item.id === id))
+      setInCart(cart.some((item) => {
+        if (item.color) return item.id === id && item.color === searchParams.color
+
+        return item.id === id
+      }))
     }
-  }, [])
+  }, [searchParams.color])
 
   const handleAddCart = () => {
     setCart({
