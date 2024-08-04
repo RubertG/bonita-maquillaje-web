@@ -5,6 +5,7 @@ import { Delete, Plus } from "@/components/common/icons"
 import { Product } from "@/types/admin/admin"
 import { Tone } from "@/types/db/db"
 import clsx from "clsx"
+import Link from "next/link"
 import { useEffect, useState } from "react"
 
 interface Props {
@@ -46,7 +47,12 @@ export const AddProductCard = ({
           <h3 className="lg:text-lg text-text-100 text-ellipsis overflow-hidden whitespace-nowrap"
             title={product.name}
           >
-            {product.name}
+            <Link
+              href={`/catalogo/${product.id}${product.tone ? `?color=${product.tone.color}` : ""}`}
+              target="_blank"
+              title={`Ir al producto ${product.name}`}>
+              {product.name}
+            </Link>
           </h3>
 
           <div className="flex gap-2.5 items-center flex-wrap">
@@ -123,7 +129,12 @@ export const DeleteProductCard = ({
           <h3 className="lg:text-lg text-text-100 text-ellipsis overflow-hidden whitespace-nowrap"
             title={product.name}
           >
-            {product.name}
+            <Link
+              href={`/catalogo/${product.id}${product.tone ? `?color=${product.tone.color}` : ""}`}
+              target="_blank"
+              title={`Ir al producto ${product.name}`}>
+              {product.name}
+            </Link>
           </h3>
 
           <div className="flex gap-3 items-center flex-wrap">
