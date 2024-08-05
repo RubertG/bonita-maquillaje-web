@@ -17,10 +17,11 @@ import { Popup } from "../common/popup"
 import { Button } from "../common/button"
 
 export const OrderFormCart = ({
-  className, id
+  className, id, colorDefault
 }: {
   className?: string,
-  id?: string
+  id?: string,
+  colorDefault?: string
 }) => {
   const [popup, setPopup] = useState(false)
   const router = useRouter()
@@ -121,7 +122,11 @@ export const OrderFormCart = ({
       let cart = await getCart()
 
       if (id) {
-        cart = cart.filter(product => product.id === id)
+        if (colorDefault) {
+          cart = cart.filter(product => product.id === id && product.tone?.color === colorDefault)
+        } else{
+          cart = cart.filter(product => product.id === id)
+        }
       }
 
       setProducts(cart)

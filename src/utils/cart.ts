@@ -10,16 +10,19 @@ export const setCart = (item: ItemCart) => {
     return
   }
 
-  const parseCart = JSON.parse(cartLocal) as ItemCart[]
+  let parseCart = JSON.parse(cartLocal) as ItemCart[]
 
   if (parseCart.find(it => {
     if (it.color) return it.color === item.color && it.id === item.id
 
     return it.id === item.id
-  })) return
+  })) {
+    parseCart = parseCart.map(it => it.id === item.id ? { ...it, amount: item.amount } : it)
+  } else {
+    parseCart.push(item)
+  }
 
-  const newCart = [...parseCart, item]
-  localStorage.setItem('cart', JSON.stringify(newCart))
+  localStorage.setItem('cart', JSON.stringify(parseCart))
 }
 
 export const getCart = async () => {
@@ -35,7 +38,7 @@ export const getCart = async () => {
 
     const tone = product.tones.find(t => t.color === item.color) || product.tones[0]
 
-    const newProduct: Product = { 
+    const newProduct: Product = {
       ...product,
       amount: item.amount,
       tone
@@ -55,7 +58,7 @@ export const removeCart = (product: Product) => {
   const parseCart = JSON.parse(cartLocal) as ItemCart[]
   const newCart = parseCart.filter(it => {
     if (product.id === product.id && product.tone?.color && it?.color) {
-      return it?.color  !== product.tone?.color
+      return it?.color !== product.tone?.color
     }
 
     return it.id === product.id

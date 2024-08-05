@@ -31,7 +31,7 @@ export const ButtonsProducts = ({
         ...(searchParams.color && { color: searchParams.color }),
         amount: searchParams.cantidad ? parseInt(searchParams.cantidad) : 1
       })
-      router.push(`/carrito/${id}`)
+      router.push(`/carrito/${id}${searchParams.color ? `?color=%23${searchParams.color.slice(1)}` : ""}`)
     }
   })
 
@@ -57,7 +57,6 @@ export const ButtonsProducts = ({
       amount: searchParams.cantidad ? parseInt(searchParams.cantidad) : 1
     })
     setInCart(true)
-    router.push("/carrito")
   }
 
   return (

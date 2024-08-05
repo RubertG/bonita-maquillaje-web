@@ -30,9 +30,4 @@ La página web tiene en su home page su Linkstree con sus redes sociales, ubicac
   - Formulario para realizar pedido de todos los productos del carrito 👍
 
 4. Compra de un solo elemento del carrito 
-  - mismo layout del carrito con el formulario pero para solo un carrito 
-
-5. Página de mis pedidos 
-  - mostrar info de la compra hecha por el usuario
-  - Mostrar productos del pedido 
-  - Boton para contactar en caso de error en el pedido 
+  - mismo layout del carrito con el formulario pero para solo un carrito 👍 

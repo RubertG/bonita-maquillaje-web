@@ -68,7 +68,7 @@ export default async function ProductPage({
           </p>
 
           {
-            product.tones && (
+            product.tones?.length > 0 && (
               <>
                 <h2 className="text-lg text-text-100 mt-5">
                   Selecciona tonalidad

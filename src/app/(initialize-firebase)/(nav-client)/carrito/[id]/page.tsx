@@ -7,11 +7,15 @@ import { Suspense } from "react"
 interface Props {
   params: {
     id: string
+  },
+  searchParams: {
+    [key: string]: string | undefined
   }
 }
 
 export default function ProductPage({
-  params: { id }
+  params: { id },
+  searchParams: { color }
 }: Props) {
 
   return (
@@ -24,7 +28,7 @@ export default function ProductPage({
         <BackButtonCategory />
       </Suspense>
       <H1 className="mb-8 mt-4 lg:mt-0">Resumen del pedido</H1>
-      <OrderFormCart id={id} />
+      <OrderFormCart id={id} colorDefault={color} />
     </main>
   )
 }
