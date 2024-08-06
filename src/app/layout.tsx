@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://bonita-maquillaje.vercel.app"),
+  metadataBase: new URL("https://bonita-maquillaje.com"),
   title: "Bonita Maquillaje",
-  description: "Somos una tienda virtual y física en la ciudad de Cúcuta. Te ofrecemos los productos más TOP de marcas Colombianas en maquillaje, skincare y accesorios.",
+  description: "Bonita Maquillaje es una tienda virtual y física en la ciudad de Cúcuta. Te ofrecemos los productos más TOP de marcas Colombianas en maquillaje, skincare y accesorios.",
   authors: {
     name: "Rubert Gonzalez - Desarrollador web",
     url: "https://rubertweb.dev",
@@ -12,10 +12,10 @@ export const metadata: Metadata = {
   keywords: 'Bonita maquillaje, bonita, maquillaje, web, cucuta, tineda virtual, skincare, accesorios.',
   openGraph: {
     title: "Bonita Maquillaje",
-    description: "Somos una tienda virtual y física en la ciudad de Cúcuta. Te ofrecemos los productos más TOP de marcas Colombianas en maquillaje, skincare y accesorios.",
+    description: "Bonita Maquillaje es una tienda virtual y física en la ciudad de Cúcuta. Te ofrecemos los productos más TOP de marcas Colombianas en maquillaje, skincare y accesorios.",
     images: '/logo.webp',
     type: 'website',
-    url: 'https://bonita-maquillaje.vercel.app/',
+    url: 'https://bonita-maquillaje.com/',
     siteName: 'Bonita Maquillaje'
   }
 };
